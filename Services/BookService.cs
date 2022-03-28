@@ -16,6 +16,11 @@ namespace BookWordCount.Services
             return _ctx.Books;
         }
 
+        public Book? GetBook(int id)
+        {
+            return _ctx.Books.Find(id);
+        }
+
         //public IEnumerable<Book> GetBooksByGenre()
         //{
         //}
@@ -34,10 +39,15 @@ namespace BookWordCount.Services
             return book;
         }
 
-        public void RemoveBook(Book book)
+        public bool DeleteBook(int id)
         {
-            _ctx.Books.Remove(book);
+            var entity = _ctx.Books.Find(id);
+
+            if (entity == null) return false;
+
+            _ctx.Books.Remove(entity);
             _ctx.SaveChanges();
+            return true;
         }
     }
 }

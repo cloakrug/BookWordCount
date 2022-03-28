@@ -1,6 +1,6 @@
 ﻿namespace BookWordCount.Services
 {
-    public class PageCountService
+    public class CountService
     {
     }
 }
