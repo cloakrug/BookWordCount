@@ -1,6 +1,6 @@
-﻿namespace BookWordCount.Models
+﻿namespace BookWordCount.Models.Dtos
 {
-    public class MajorGenre
+    public class MajorGenreDto
     {
         public int Id { get; set; }
         public string Name { get; set; }

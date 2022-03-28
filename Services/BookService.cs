@@ -1,4 +1,5 @@
 ﻿using BookWordCount.Models;
+using BookWordCount.Models.Database;
 
 namespace BookWordCount.Services
 {

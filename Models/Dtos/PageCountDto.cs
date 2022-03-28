@@ -1,6 +1,6 @@
-﻿namespace BookWordCount.Models
+﻿namespace BookWordCount.Models.Dtos
 {
-    public class WordCount
+    public class PageCountDto
     {
         public int Id { get; set; }
         public int BookId { get; set; }

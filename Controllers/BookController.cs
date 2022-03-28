@@ -1,4 +1,7 @@
-﻿using BookWordCount.Models;
+﻿using AutoMapper;
+using BookWordCount.Models;
+using BookWordCount.Models.Database;
+using BookWordCount.Models.Dtos;
 using BookWordCount.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,10 +12,12 @@ namespace BookWordCount.Controllers
     public class BookController : ControllerBase
     {
         private readonly BookService _bookService;
+        private readonly IMapper _mapper;
 
-        public BookController(BookService bookService)
+        public BookController(BookService bookService, IMapper mapper)
         {
             _bookService = bookService;
+            _mapper = mapper;
         }
 
         [HttpGet("Get", Name = nameof(Get))]
@@ -20,29 +25,35 @@ namespace BookWordCount.Controllers
         [HttpGet("", Name = nameof(Get))]
         public IActionResult Get()
         {
-            // TODO: set up mapper
-            return Ok(_bookService.GetBooks());
+            var books = _bookService.GetBooks();
+
+            return Ok(_mapper.Map<List<BookDto>>(books));
         }
 
         [HttpGet("/{id}", Name = "GetBookById")]
         public IActionResult Get(int id)
         {
-            // TODO: set up mapper
-            return Ok(_bookService.GetBook(id));
+            var book = _bookService.GetBook(id);
+
+            if (book == null) return NotFound();
+
+            return Ok(_mapper.Map<BookDto>(book));
         }
 
         [HttpPost("Add", Name = nameof(Add))]
-        public IActionResult Add(Book book)
+        public IActionResult Add(BookDto bookDto)
         {
-            // TODO: set up mapper
+            var book = _mapper.Map<Book>(bookDto);
+
             return Ok(_bookService.AddBook(book));
         }
 
 
         [HttpPatch("Update/{id}", Name = nameof(Update))]
-        public IActionResult Update(Book book)
+        public IActionResult Update(BookDto bookDto)
         {
-            // TODO: set up mapper
+            var book = _mapper.Map<Book>(bookDto);
+
             return Ok(_bookService.UpdateBook(book));
         }
 

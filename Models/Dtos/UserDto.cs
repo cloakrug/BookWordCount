@@ -1,6 +1,6 @@
-﻿namespace BookWordCount.Models
+﻿namespace BookWordCount.Models.Dtos
 {
-    public class User
+    public class UserDto
     {
         public DateTime DateCreated { get; set; }
         public int Id { get; set; }
