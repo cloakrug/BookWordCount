@@ -1,4 +1,5 @@
-﻿using BookWordCount.Models.Database;
+﻿using BookWordCount.Helpers;
+using BookWordCount.Models.Database;
 using Microsoft.EntityFrameworkCore;
 
 namespace BookWordCount.Models

@@ -1,4 +1,4 @@
-﻿namespace BookWordCount.Models.Dtos
+﻿namespace BookWordCount.Models.Dto
 {
     public class MajorGenreDto
     {
