@@ -9,6 +9,8 @@ namespace BookWordCount.AutoMapper
         public UserProfile()
         {
             CreateMap<BookDto, Book>().ReverseMap();
+
+            CreateMap<AddBookDto, Book>().ReverseMap();
         }
     }
 }

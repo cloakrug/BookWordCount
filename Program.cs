@@ -1,4 +1,7 @@
+using BookWordCount.Helpers;
+using BookWordCount.Interfaces;
 using BookWordCount.Models;
+using BookWordCount.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -7,10 +10,14 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 
-builder.Services.AddDbContext<BookContext>(opt => 
-    opt.UseInMemoryDatabase("bookdb"));
+builder.Services.AddDbContext<BookContext>(opt =>
+{
+    opt.UseInMemoryDatabase("bookdb");
+});
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+builder.Services.AddScoped<IBookService, BookService>();
 
 // TODO: Delete - this is used to seed data while testing.
 builder.Services.AddScoped<BookDbInitializer>();

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using BookWordCount.Interfaces;
 using BookWordCount.Models;
 using BookWordCount.Models.Database;
 using BookWordCount.Models.Dtos;
@@ -11,10 +12,10 @@ namespace BookWordCount.Controllers
     [Route("[controller]")]
     public class BookController : ControllerBase
     {
-        private readonly BookService _bookService;
+        private readonly IBookService _bookService;
         private readonly IMapper _mapper;
 
-        public BookController(BookService bookService, IMapper mapper)
+        public BookController(IBookService bookService, IMapper mapper)
         {
             _bookService = bookService;
             _mapper = mapper;
@@ -40,12 +41,11 @@ namespace BookWordCount.Controllers
             return Ok(_mapper.Map<BookDto>(book));
         }
 
-        [HttpPost("Add", Name = nameof(Add))]
-        public IActionResult Add(BookDto bookDto)
-        {
-            var book = _mapper.Map<Book>(bookDto);
 
-            return Ok(_bookService.AddBook(book));
+        [HttpPost("Add", Name = nameof(Add))]
+        public IActionResult Add(AddBookDto addBookDto)
+        {
+            return Ok(_bookService.AddBook(addBookDto));
         }
 
 
