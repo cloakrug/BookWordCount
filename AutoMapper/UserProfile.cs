@@ -11,6 +11,8 @@ namespace BookWordCount.AutoMapper
             CreateMap<BookDto, Book>().ReverseMap();
 
             CreateMap<AddBookDto, Book>().ReverseMap();
+
+            CreateMap<GenreDto, Genre>().ReverseMap();
         }
     }
 }

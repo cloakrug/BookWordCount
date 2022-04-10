@@ -8,8 +8,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BookWordCount.Controllers
 {
-    [ApiController]
     [Route("[controller]")]
+    [ApiController]
     public class BookController : ControllerBase
     {
         private readonly IBookService _bookService;
@@ -21,9 +21,7 @@ namespace BookWordCount.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet("Get", Name = nameof(Get))]
-
-        [HttpGet("", Name = nameof(Get))]
+        [HttpGet("", Name = "GetBooks")]
         public IActionResult Get()
         {
             var books = _bookService.GetBooks();
@@ -31,7 +29,7 @@ namespace BookWordCount.Controllers
             return Ok(_mapper.Map<List<BookDto>>(books));
         }
 
-        [HttpGet("/{id}", Name = "GetBookById")]
+        [HttpGet("{id}", Name = "GetBookById")]
         public IActionResult Get(int id)
         {
             var book = _bookService.GetBook(id);
@@ -41,15 +39,13 @@ namespace BookWordCount.Controllers
             return Ok(_mapper.Map<BookDto>(book));
         }
 
-
         [HttpPost("Add", Name = nameof(Add))]
         public IActionResult Add(AddBookDto addBookDto)
         {
             return Ok(_bookService.AddBook(addBookDto));
         }
 
-
-        [HttpPatch("Update/{id}", Name = nameof(Update))]
+        [HttpPost("Update/{id}", Name = nameof(Update))]
         public IActionResult Update(BookDto bookDto)
         {
             var book = _mapper.Map<Book>(bookDto);
@@ -57,7 +53,7 @@ namespace BookWordCount.Controllers
             return Ok(_bookService.UpdateBook(book));
         }
 
-        [HttpDelete]
+        [HttpDelete("Delete/{id}", Name = nameof(Delete))]
         public IActionResult Delete(int id)
         {
             return Ok(_bookService.DeleteBook(id));

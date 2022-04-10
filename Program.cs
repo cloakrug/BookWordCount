@@ -18,6 +18,7 @@ builder.Services.AddDbContext<BookContext>(opt =>
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.AddScoped<IBookService, BookService>();
+builder.Services.AddScoped<IGenreService, GenreService>();
 
 // TODO: Delete - this is used to seed data while testing.
 builder.Services.AddScoped<BookDbInitializer>();
