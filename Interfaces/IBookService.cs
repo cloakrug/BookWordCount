@@ -5,7 +5,7 @@ namespace BookWordCount.Interfaces
 {
     public interface IBookService
     {
-        Book AddBook(AddBookDto addBookDto);
+        BookDto AddBook(AddBookDto addBookDto);
         bool DeleteBook(int id);
         Book? GetBook(int id);
         IEnumerable<Book> GetBooks();

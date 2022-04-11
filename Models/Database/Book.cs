@@ -4,7 +4,7 @@ namespace BookWordCount.Models.Database
 {
     public class Book
     {
-        [Key]
+        [Key] // Don't really need this because Id is made the PK by convention
         public int Id { get; set; }
         public string Title { get; set; }
         public DateTime CreatedDate { get; set; }
@@ -12,6 +12,6 @@ namespace BookWordCount.Models.Database
         public string Description { get; set; }
         public string ImageUrl { get; set; }
         
-        virtual public List<BookGenre> Genres { get; set; }
+        virtual public List<Genre> Genres { get; set; }
     }
 }

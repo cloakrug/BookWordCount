@@ -7,5 +7,6 @@ namespace BookWordCount.Models.Database
         [Key]
         public int Id { get; set; }
         public string Name { get; set; }
+        virtual public List<Book> Books { get; set; }
     }
 }
