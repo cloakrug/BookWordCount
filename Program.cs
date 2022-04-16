@@ -19,6 +19,7 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.AddScoped<IBookService, BookService>();
 builder.Services.AddScoped<IGenreService, GenreService>();
+builder.Services.AddScoped<IWordCountService, WordCountService>();
 
 // TODO: Delete - this is used to seed data while testing.
 builder.Services.AddScoped<BookDbInitializer>();
