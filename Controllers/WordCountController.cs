@@ -1,4 +1,5 @@
-﻿using BookWordCount.Models.Dtos;
+﻿using BookWordCount.Interfaces;
+using BookWordCount.Models.Dtos;
 using BookWordCount.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,18 +9,18 @@ namespace BookWordCount.Controllers
     [ApiController]
     public class WordCountController : ControllerBase
     {
-        private readonly WordCountService _wordCountService;
+        private readonly IWordCountService _wordCountService;
 
-        public WordCountController(WordCountService wordCountService)
+        public WordCountController(IWordCountService wordCountService)
         {
             _wordCountService = wordCountService;
         }
 
         [HttpGet("~/[action]")]
-        public IActionResult GetCurrentUserWordCounts()
+        public IActionResult GetCurrentUserWordCounts(int userId)
         {
             // TODO: use user ID from token sub
-            var userWordCounts = _wordCountService.GetUserWordCounts(1);
+            var userWordCounts = _wordCountService.GetUserWordCounts(userId);
             
             if (userWordCounts.Any())
             {
@@ -31,9 +32,9 @@ namespace BookWordCount.Controllers
         }
         
         [HttpGet]
-        public IActionResult GetByUser()
+        public IActionResult GetByUser(int userId, int bookId)
         {
-            var wordCount = _wordCountService.GetUserWordCount(1, 2);
+            var wordCount = _wordCountService.GetUserWordCount(userId, bookId);
 
             if (wordCount != null)
             {
@@ -45,9 +46,9 @@ namespace BookWordCount.Controllers
         }
 
         [HttpPost]
-        public IActionResult Add(ChangeWordCountDto changeCountDto)
+        public IActionResult Add(ChangeWordCountDto changeCountDto, int userId)
         {
-            if (_wordCountService.AddWordCount(changeCountDto, 1))
+            if (_wordCountService.AddWordCount(changeCountDto, userId))
             {
                 return Ok();
             } else
@@ -57,9 +58,9 @@ namespace BookWordCount.Controllers
         }
         
         [HttpPatch]
-        public IActionResult Update(ChangeWordCountDto changeCountDto)
+        public IActionResult Update(ChangeWordCountDto changeCountDto, int userId)
         {
-            if (_wordCountService.UpdateWordCount(changeCountDto, 1))
+            if (_wordCountService.UpdateWordCount(changeCountDto, userId))
             {
                 return Ok();
             }
