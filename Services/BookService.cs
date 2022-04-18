@@ -21,7 +21,9 @@ namespace BookWordCount.Services
 
         public IEnumerable<Book> GetBooks()
         {
-            return _ctx.Books.Include(x => x.Genres);
+            return _ctx.Books
+                .Include(x => x.Genres)
+                .Include(x => x.MajorGenre);
         }
 
         public Book? GetBook(int id)

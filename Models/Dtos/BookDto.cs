@@ -12,5 +12,6 @@ namespace BookWordCount.Models.Dtos
         public string ImageUrl { get; set; }
         
         virtual public List<GenreDto> Genres { get; set; }
+        virtual public MajorGenreDto MajorGenre { get; set; }
     }
 }

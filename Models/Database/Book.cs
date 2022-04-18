@@ -13,5 +13,6 @@ namespace BookWordCount.Models.Database
         public string ImageUrl { get; set; }
         
         virtual public List<Genre> Genres { get; set; }
+        virtual public MajorGenre MajorGenre { get; set; }
     }
 }

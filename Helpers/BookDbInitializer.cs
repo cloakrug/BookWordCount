@@ -57,7 +57,8 @@ namespace BookWordCount.Helpers
                 ReleaseDate = DateTime.Now,
                 Description = "depressing...",
                 ImageUrl = "",
-                Genres = new List<Genre>() { _context.Genres.ToList()[0] }
+                Genres = new List<Genre>() { _context.Genres.ToList()[0] },
+                MajorGenre = _context.MajorGenres.ToList()[0]
             });
 
             defaultBooks.Add(new Book()
@@ -68,7 +69,8 @@ namespace BookWordCount.Helpers
                 ReleaseDate = DateTime.Now,
                 Description = "nice book",
                 ImageUrl = "",
-                Genres = new List<Genre>() { _context.Genres.ToList()[1] }
+                Genres = new List<Genre>() { _context.Genres.ToList()[1] },
+                MajorGenre = _context.MajorGenres.ToList()[1]
             });
 
             return defaultBooks;
