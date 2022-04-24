@@ -22,6 +22,9 @@ namespace BookWordCount.Helpers
 
             _context.AddRange(getDefaultBooks());
             _context.SaveChanges();
+
+            _context.AddRange(getDefaultWordCounts());
+            _context.SaveChanges();
         }
 
         private IList<Genre> getDefaultGenres()
@@ -74,6 +77,31 @@ namespace BookWordCount.Helpers
             });
 
             return defaultBooks;
+        }
+
+        private IList<WordCount> getDefaultWordCounts()
+        {
+            List<WordCount> defaultWordCounts = new List<WordCount>();
+
+            defaultWordCounts.Add(new WordCount()
+            {
+                Book = _context.Books.ToList()[0],
+                UserId = 1,
+                Count = 23,
+                Created = DateTime.Now,
+                LastModified = DateTime.Now
+            });
+
+            defaultWordCounts.Add(new WordCount()
+            {
+                Book = _context.Books.ToList()[1],
+                UserId = 1,
+                Count = 44,
+                Created = DateTime.Now,
+                LastModified = DateTime.Now
+            });
+
+            return defaultWordCounts;
         }
     }
 }

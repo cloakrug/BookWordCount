@@ -2,8 +2,10 @@
 {
     public class WordCountDto
     {
-        public int BookId { get; set; }
         public int UserId { get; set; }
         public int Count { get; set; }
+        public DateTime Created { get; set; }
+        public DateTime LastModified { get; set; }
+        public BookDto Book { get; set; }
     }
 }
