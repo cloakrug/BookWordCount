@@ -1,7 +1,7 @@
 import React from 'react';
+import { Outlet } from 'react-router-dom';
 import './App.css';
-import MainPageContainer from './components/MainPageContainer';
-import Nav from './components/Nav';
+import Nav from './components/Nav/Nav';
 
 function App() {
   return (
@@ -9,8 +9,8 @@ function App() {
         <header className="App-header">
             <h1>WordCount.com</h1>
             <Nav />    
-            <MainPageContainer />
-        </header>
+          </header>
+        <Outlet />
     </div>
   );
 }
