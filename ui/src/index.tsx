@@ -20,7 +20,7 @@ root.render(
                     <Route path=":bookId" element={<BookPage />} />
                     <Route path="about" element={<AboutPage />} />
                     <Route path="book" element={<BookPage />} />
-                    <Route path="*" element={<NotFoundPage />} />
+                    <Route path="*" element={<NotFoundPage />} /> 
                 </Route>
             </Routes>
         </BrowserRouter>
