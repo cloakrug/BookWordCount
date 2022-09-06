@@ -6,6 +6,7 @@ import App from './App';
 import AboutPage from './components/AboutPage/AboutPage';
 import BookPage from './components/BookPage/BookPage';
 import NotFoundPage from './components/NotFoundPage/NotFoundPage';
+import BrowsePage from './components/Browse/BrowsePage';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -15,6 +16,7 @@ root.render(
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<App />}>
+                    <Route path="" element={ <BrowsePage /> } />
                     <Route path="about" element={<AboutPage />} />
                     <Route path="book" element={<BookPage />} />
                     <Route path="*" element={<NotFoundPage />} />

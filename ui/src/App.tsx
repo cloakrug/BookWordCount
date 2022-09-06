@@ -9,7 +9,7 @@ function App() {
         <header className="App-header">
             <h1>WordCount.com</h1>
             <Nav />    
-          </header>
+        </header>
         <Outlet />
     </div>
   );
