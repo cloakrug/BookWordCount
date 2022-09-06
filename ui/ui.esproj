@@ -13,6 +13,7 @@
   <ItemGroup>
     <Folder Include="src\components\AboutPage\" />
     <Folder Include="src\components\Browse\" />
+    <Folder Include="src\components\Book\" />
     <Folder Include="src\components\SearchResultsDropdown\" />
   </ItemGroup>
   <!-- This target is copied from the ASP.NET SPA template in order to ensure node_modules are in place. -->

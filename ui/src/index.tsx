@@ -16,7 +16,8 @@ root.render(
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<App />}>
-                    <Route path="" element={ <BrowsePage /> } />
+                    <Route path="" element={<BrowsePage />} />
+                    <Route path=":bookId" element={<BookPage />} />
                     <Route path="about" element={<AboutPage />} />
                     <Route path="book" element={<BookPage />} />
                     <Route path="*" element={<NotFoundPage />} />
