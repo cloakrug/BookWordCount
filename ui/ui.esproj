@@ -3,7 +3,7 @@
     <ProjectGuid>bc913eef-08ef-49aa-a351-7c06259e628f</ProjectGuid>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupCommand>set BROWSER=none&amp;&amp;npm start</StartupCommand>
+    <StartupCommand>npm start</StartupCommand>
     <JavaScriptTestRoot>src\</JavaScriptTestRoot>
     <JavaScriptTestFramework>Jest</JavaScriptTestFramework>
   </PropertyGroup>
