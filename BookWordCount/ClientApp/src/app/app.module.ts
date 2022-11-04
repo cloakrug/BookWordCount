@@ -5,27 +5,35 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
-import { NavMenuComponent } from './nav-menu/nav-menu.component';
-import { HomeComponent } from './home/home.component';
-import { CounterComponent } from './counter/counter.component';
-import { FetchDataComponent } from './fetch-data/fetch-data.component';
+import { NavComponent } from './nav/nav.component';
+import { BookPageComponent } from './book-page/book-page.component';
+import { NotFoundComponent } from './not-found/not-found.component';
+import { SearchBarComponent } from './search-bar/search-bar.component';
+import { AboutPageComponent } from './about-page/about-page.component';
+import { BrowsePageComponent } from './browse-page/browse-page.component';
+import { HomePageComponent } from './home-page/home-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavMenuComponent,
-    HomeComponent,
-    CounterComponent,
-    FetchDataComponent
+    NavComponent,
+    BookPageComponent,
+    NotFoundComponent,
+    SearchBarComponent,
+    AboutPageComponent,
+    BrowsePageComponent,
+    HomePageComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'counter', component: CounterComponent },
-      { path: 'fetch-data', component: FetchDataComponent },
+      { path: "browse", component: BrowsePageComponent },
+      { path: "about", component: AboutPageComponent },
+      { path: "book/:id", component: BookPageComponent },
+      { path: "", component: HomePageComponent, pathMatch: 'full' },
+      { path: '**', component: NotFoundComponent }
     ])
   ],
   providers: [],
