@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
 namespace BookWordCount.Models.Dtos
-{ 
+{
     public class BookDto
     {
         public int Id { get; set; }
@@ -10,7 +10,7 @@ namespace BookWordCount.Models.Dtos
         public DateTime ReleaseDate { get; set; }
         public string Description { get; set; }
         public string ImageUrl { get; set; }
-        
+
         virtual public List<GenreDto> Genres { get; set; }
         virtual public MajorGenreDto MajorGenre { get; set; }
     }

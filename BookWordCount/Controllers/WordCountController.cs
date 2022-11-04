@@ -21,16 +21,17 @@ namespace BookWordCount.Controllers
         {
             // TODO: use user ID from token sub
             var userWordCounts = _wordCountService.GetUserWordCounts(userId);
-            
+
             if (userWordCounts.Any())
             {
                 return Ok(userWordCounts);
-            } else
+            }
+            else
             {
                 return NotFound();
             }
         }
-        
+
         [HttpGet]
         public IActionResult GetByUser(int userId, int bookId)
         {
@@ -39,7 +40,8 @@ namespace BookWordCount.Controllers
             if (wordCount != null)
             {
                 return Ok(wordCount);
-            } else
+            }
+            else
             {
                 return NotFound();
             }
@@ -51,12 +53,13 @@ namespace BookWordCount.Controllers
             if (_wordCountService.AddWordCount(changeCountDto, userId))
             {
                 return Ok();
-            } else
+            }
+            else
             {
                 return StatusCode(500);
             }
         }
-        
+
         [HttpPatch]
         public IActionResult Update(ChangeWordCountDto changeCountDto, int userId)
         {
@@ -76,7 +79,8 @@ namespace BookWordCount.Controllers
             if (_wordCountService.DeleteWordCount(wordCountId))
             {
                 return Ok();
-            } else
+            }
+            else
             {
                 return StatusCode(500);
             }

@@ -1,8 +1,8 @@
-﻿using AutoMapper;
-using BookWordCount.Interfaces;
-using BookWordCount.Models;
+﻿using BookWordCount.Interfaces;
 using BookWordCount.Models.Database;
 using BookWordCount.Models.Dtos;
+using AutoMapper;
+using BookWordCount.Models;
 using BookWordCount.Services;
 using Microsoft.AspNetCore.Mvc;
 

@@ -1,7 +1,7 @@
-﻿using AutoMapper;
-using BookWordCount.Interfaces;
+﻿using BookWordCount.Interfaces;
 using BookWordCount.Models;
 using BookWordCount.Models.Dtos;
+using AutoMapper;
 
 namespace BookWordCount.Services
 {

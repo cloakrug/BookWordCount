@@ -1,6 +1,6 @@
-﻿using AutoMapper;
-using BookWordCount.Models.Database;
+﻿using BookWordCount.Models.Database;
 using BookWordCount.Models.Dtos;
+using AutoMapper;
 
 namespace BookWordCount.AutoMapper
 {

@@ -11,7 +11,7 @@ namespace BookWordCount.Models.Database
         public DateTime ReleaseDate { get; set; }
         public string Description { get; set; }
         public string ImageUrl { get; set; }
-        
+
         virtual public List<Genre> Genres { get; set; }
         virtual public MajorGenre MajorGenre { get; set; }
     }
