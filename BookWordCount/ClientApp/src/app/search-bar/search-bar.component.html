@@ -1,1 +1,18 @@
-<p>search-bar works!</p>
+<div class="search-bar">
+  <input type="text" [(ngModel)]="searchText" (change)="onSearchInput($event)" />
+  <div *ngIf="results.length > 0" class="results">
+    <div *ngFor="let result of results" class="result">
+      <p [innerText]="result.title"></p>
+      <p [innerText]="result.id"></p>
+      <p [innerText]="result.shortDescription"></p>
+      <p [innerText]="result.imgUrl"></p>
+    </div>
+  </div>
+</div>
+
+
+  <!--
+  title: string,
+  id: string,
+  shortDescription: string,
+  imgUrl?: string-->

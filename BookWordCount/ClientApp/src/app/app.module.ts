@@ -12,6 +12,8 @@ import { SearchBarComponent } from './search-bar/search-bar.component';
 import { AboutPageComponent } from './about-page/about-page.component';
 import { BrowsePageComponent } from './browse-page/browse-page.component';
 import { HomePageComponent } from './home-page/home-page.component';
+import { NameComponentComponent } from './name-component/name-component.component';
+import { BookService } from './services/book.service';
 
 @NgModule({
   declarations: [
@@ -23,6 +25,7 @@ import { HomePageComponent } from './home-page/home-page.component';
     AboutPageComponent,
     BrowsePageComponent,
     HomePageComponent,
+    NameComponentComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -36,7 +39,7 @@ import { HomePageComponent } from './home-page/home-page.component';
       { path: '**', component: NotFoundComponent }
     ])
   ],
-  providers: [],
+  providers: [BookService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

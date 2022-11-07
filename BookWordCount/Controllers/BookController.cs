@@ -39,6 +39,27 @@ namespace BookWordCount.Controllers
             return Ok(_mapper.Map<BookDto>(book));
         }
 
+        [HttpGet("search", Name = "Search")]
+        public IActionResult Search(string str, int? pageNum)
+        {
+            var results = _bookService.Search(str, Constants.SearchMethods.Popularity, 10, pageNum);
+
+            IEnumerable<BookSearchResult> searchResults =
+                results.ToList().Select<Book, BookSearchResult>( book =>
+                    {
+                        return new BookSearchResult()
+                        {
+                            Id = book.Id,
+                            Title = book.Title,
+                            ImageUrl = book.ImageUrl,
+                            ReleaseDate = book.ReleaseDate,
+                            ShortDescription = book.Description.Substring(0, 200)
+                        };
+                    });
+
+            return Ok(searchResults.ToList());
+        }
+
         [HttpPost("Add", Name = nameof(Add))]
         public IActionResult Add(AddBookDto addBookDto)
         {

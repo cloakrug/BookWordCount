@@ -31,11 +31,32 @@ namespace BookWordCount.Services
             return _ctx.Books.Find(id);
         }
 
-        //// TODO: pagination
-        //public IEnumerable<Book> Search(string term, SearchMethods method = SearchMethods.Popularity)
-        //{
+        public IEnumerable<Book> Search(
+            string searchTerm, 
+            SearchMethods method = SearchMethods.Popularity,
+            int? pageSize = 10,
+            int? pageNumber = null,
+            string? filter = null
+            )
+        {
+            var res = GetBooks()
+                .Where(book => book.Title.Contains(searchTerm));
 
-        //}
+            if (filter != null)
+            {
+                res = res.Where(book => book.Title != filter);
+            }
+
+            res = res.OrderBy(book => book.Title);   // TODO: sort by popularity
+
+            if (pageNumber != null && pageSize != null)
+            {
+                res = res.Skip(pageNumber.Value * pageSize.Value);
+                res = res.Take(pageSize.Value);
+            }
+
+            return res;
+        }
 
         //public IEnumerable<Book> GetBooksByGenre()
         //{
