@@ -1,18 +1,25 @@
 <div class="search-bar">
-  <input type="text" [(ngModel)]="searchText" (change)="onSearchInput($event)" />
+  <input type="text" [(ngModel)]="searchText" (change)="onSearchInput($event)" class="search-input"/>
   <div *ngIf="results.length > 0" class="results">
-    <div *ngFor="let result of results" class="result">
-      <p [innerText]="result.title"></p>
-      <p [innerText]="result.id"></p>
-      <p [innerText]="result.shortDescription"></p>
-      <p [innerText]="result.imgUrl"></p>
+    <div *ngFor="let result of results" class="result" (click)="handleResultClick(result.id)">
+      <div class="result-img-container">
+        <img [src]="result.imgUrl" class="result-img"/>
+      </div>
+      <div class="result-right">
+        <div class="result-title-row">
+          <p [innerText]="result.title" class="result-title"></p>
+          <p [innerText]="result.releaseYear" class="result-year"></p>
+        </div>
+        <div class="result-more-info-row">
+          <p [innerText]="result.author" class="result-author"></p>
+          <div class="result-genres">
+            <p *ngFor="let genre of result.genres" [innerText]="genre.text" class="result-genre"></p>
+          </div>
+        </div>
+        <div class="result-desc-row">
+          <p [innerText]="result.shortDescription" class="result-desc"></p>
+        </div>
+      </div>
     </div>
   </div>
 </div>
-
-
-  <!--
-  title: string,
-  id: string,
-  shortDescription: string,
-  imgUrl?: string-->

@@ -45,7 +45,7 @@ namespace BookWordCount.Controllers
             var results = _bookService.Search(str, Constants.SearchMethods.Popularity, 10, pageNum);
 
             IEnumerable<BookSearchResult> searchResults =
-                results.ToList().Select<Book, BookSearchResult>( book =>
+                results.Select<Book, BookSearchResult>( book =>
                     {
                         return new BookSearchResult()
                         {
@@ -53,9 +53,9 @@ namespace BookWordCount.Controllers
                             Title = book.Title,
                             ImageUrl = book.ImageUrl,
                             ReleaseDate = book.ReleaseDate,
-                            ShortDescription = book.Description.Substring(0, 200)
-                        };
-                    });
+                            ShortDescription = new string(book.Description.Take(200).ToArray())
+                    };
+                });
 
             return Ok(searchResults.ToList());
         }

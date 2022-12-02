@@ -1,0 +1,97 @@
+p {
+    padding: 0;
+    margin: 0;
+}
+
+.search-bar {
+    width: 700px;
+}
+
+.search-input {
+  font-size: 1.5rem;
+}
+
+.results {
+    width: 700px;
+    max-height: 50vh;
+    overflow: scroll;
+}
+
+.result {
+    width: 100%;
+    /*height: 5rem;*/
+    display: flex;
+    flex-direction: row;
+    cursor: pointer;
+}
+
+.result-img-container {
+    width: 5rem;
+    height: 5rem;
+}
+
+.result-img {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    display: inline-block;
+}
+
+.result-right {
+    flex-grow: 1;
+    display: inline-block;
+}
+
+.result-title-row, .result-more-info-row, .result-desc-row {
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.result-title-row {
+  width: 100%;
+  background-color: darkslategrey;
+  color: white;
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+}
+
+.result-title {
+    flex-grow: 1;
+    font-size: 1.25rem;
+}
+
+.result-more-info-row {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+}
+
+.result-author {
+    flex-shrink: 1;
+    font-size: 1rem;
+}
+
+.result-genres {
+    flex-grow: 1;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.result-genre {
+    border-radius: 4rem;  /* Big enough for bubble */
+    background-color: burlywood;  /* TODO: set based on text */
+    display: inline-block;
+    padding: 0 1rem;
+    font-size: .8rem;
+}
+
+.result-desc-row {
+  width: 100%;
+}
+
+
+
+
+
