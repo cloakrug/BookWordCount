@@ -1,1 +1,13 @@
-<p>book works!</p>
+<div class="page-container">
+
+  <ng-container *ngIf="book">
+    <h1 [innerText]="book.title"></h1>
+    <h3 [innerText]="book.author"></h3>
+    <p [innerText]="book.description"></p>
+    <p *ngFor="let genre of book.genres" [innerText]="genre.text" class="genre"></p>
+  </ng-container>
+
+  <ng-container *ngIf="errorGettingBook">
+    <p>Error getting book</p>
+  </ng-container>
+</div>

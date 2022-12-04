@@ -1,3 +1,5 @@
+import { Genre } from "./genre";
+
 export interface Book {
   id: string,
   title: string,
@@ -6,6 +8,6 @@ export interface Book {
   releasedDate: Date,
   description: string,
   imageUrl: string,
-  genres: string[],
+  genres: Genre[],
   majorGenre: string
 };
