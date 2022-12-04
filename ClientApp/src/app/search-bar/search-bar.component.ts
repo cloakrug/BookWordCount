@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { BookService } from '../services/book.service';
-import { BookResult, SearchResult } from './searchresult';
+import { BookResult, SearchResult } from '../models/searchresult';
 
 @Component({
   selector: 'app-search-bar',
