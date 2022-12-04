@@ -31,9 +31,9 @@ namespace BookWordCount.Helpers
         {
             IList<Genre> defaultGenres = new List<Genre>();
 
-            defaultGenres.Add(new Genre() { Id = 1, Name = "Action" });
-            defaultGenres.Add(new Genre() { Id = 2, Name = "Horror" });
-            defaultGenres.Add(new Genre() { Id = 3, Name = "Mystery" });
+            defaultGenres.Add(new Genre() { Id = 1, Text = "Action" });
+            defaultGenres.Add(new Genre() { Id = 2, Text = "Horror" });
+            defaultGenres.Add(new Genre() { Id = 3, Text = "Mystery" });
 
             return defaultGenres;
         }
@@ -42,8 +42,8 @@ namespace BookWordCount.Helpers
         {
             List<MajorGenre> defaultMajorGenres = new List<MajorGenre>();
 
-            defaultMajorGenres.Add(new MajorGenre() { Id = 1, Name = "Fiction" });
-            defaultMajorGenres.Add(new MajorGenre() { Id = 2, Name = "Non-Fiction" });
+            defaultMajorGenres.Add(new MajorGenre() { Id = 1, Text = "Fiction" });
+            defaultMajorGenres.Add(new MajorGenre() { Id = 2, Text = "Non-Fiction" });
 
             return defaultMajorGenres;
         }
@@ -55,18 +55,23 @@ namespace BookWordCount.Helpers
             defaultBooks.Add(new Book()
             {
                 Id = 1,
+                Author = "Cormac McCarthy",
                 Title = "The Road",
                 CreatedDate = DateTime.Now,
                 ReleaseDate = DateTime.Now,
                 Description = "depressing...",
                 ImageUrl = "",
-                Genres = new List<Genre>() { _context.Genres.ToList()[0] },
+                Genres = new List<Genre>() { 
+                    _context.Genres.ToList()[0],
+                    _context.Genres.ToList()[1]
+                },
                 MajorGenre = _context.MajorGenres.ToList()[0]
             });
 
             defaultBooks.Add(new Book()
             {
                 Id = 2,
+                Author = "Khaled Hosseini",
                 Title = "Kite Runner",
                 CreatedDate = DateTime.Now,
                 ReleaseDate = DateTime.Now,

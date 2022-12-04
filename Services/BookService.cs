@@ -28,7 +28,10 @@ namespace BookWordCount.Services
 
         public Book? GetBook(int id)
         {
-            return _ctx.Books.Find(id);
+            return _ctx.Books
+                .Include(x => x.Genres)
+                .Include(x => x.MajorGenre)
+                .FirstOrDefault(x => x.Id == id);
         }
 
         public IEnumerable<Book> Search(

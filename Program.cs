@@ -2,7 +2,9 @@ using BookWordCount.Helpers;
 using BookWordCount.Interfaces;
 using BookWordCount.Models;
 using BookWordCount.Services;
+using Microsoft.AspNetCore.Http.Json;
 using Microsoft.EntityFrameworkCore;
+using System.Text.Json;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,6 +21,11 @@ builder.Services.AddControllersWithViews();
 //                .AllowAnyHeader()
 //                .AllowAnyMethod();
 //        });
+//});
+
+//builder.Services.Configure<JsonOptions>(options =>
+//{
+//    options.SerializerOptions.PropertyNameCaseInsensitive = true;
 //});
 
 var MyAllowSpecificOrigins = "MyAllowSpecificOrigins";
