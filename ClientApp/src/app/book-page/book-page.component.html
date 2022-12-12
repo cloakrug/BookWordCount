@@ -3,10 +3,15 @@
   <app-search-bar></app-search-bar>
 
   <ng-container *ngIf="book">
-    <h1 [innerText]="book.title"></h1>
-    <h3 [innerText]="book.author"></h3>
-    <p [innerText]="book.description"></p>
-    <p *ngFor="let genre of book.genres" [innerText]="genre.text" class="genre"></p>
+    <div class="bookInfo">
+      <h1 [innerText]="book.title"></h1>
+      <h3 [innerText]="book.author"></h3>
+      <p [innerText]="book.description"></p>
+      <p *ngFor="let genre of book.genres" [innerText]="genre.text" class="genre"></p>
+    </div>
+
+    <word-count-form></word-count-form>
+
   </ng-container>
 
   <ng-container *ngIf="errorGettingBook">

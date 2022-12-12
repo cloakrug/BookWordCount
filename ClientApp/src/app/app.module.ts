@@ -1,6 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
@@ -14,6 +17,8 @@ import { BrowsePageComponent } from './browse-page/browse-page.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { NameComponentComponent } from './name-component/name-component.component';
 import { BookService } from './services/book.service';
+import { WordCountFormComponent } from './word-count-form/word-count-form.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -26,18 +31,24 @@ import { BookService } from './services/book.service';
     BrowsePageComponent,
     HomePageComponent,
     NameComponentComponent,
+    WordCountFormComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatCheckboxModule,
     RouterModule.forRoot([
       { path: "browse", component: BrowsePageComponent },
       { path: "about", component: AboutPageComponent },
       { path: "book/:id", component: BookPageComponent },
       { path: "", component: HomePageComponent, pathMatch: 'full' },
       { path: '**', component: NotFoundComponent }
-    ])
+    ]),
+    BrowserAnimationsModule
   ],
   providers: [BookService],
   bootstrap: [AppComponent]

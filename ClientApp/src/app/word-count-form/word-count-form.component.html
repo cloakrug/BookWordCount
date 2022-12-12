@@ -1,0 +1,16 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="form">
+
+  <p><mat-checkbox formControlName="cbxWordCount" id="cbxWordCount">Word Count</mat-checkbox></p>
+  <p><mat-checkbox formControlName="cbxPageCount" id="cbxPageCount">Page Count</mat-checkbox></p>
+  <p><mat-checkbox formControlName="cbxTimeToRead" id="cbxTimeToRead">Time to Read</mat-checkbox></p>
+
+  <!--<mat-input formControlName="wordCount"></mat-input>
+  <mat-input formControlName="pageCount"></mat-input>-->
+
+  <!--<section>
+    <input formControlName="timeToReadH" type="number"> hours
+    <input formControlName="timeToReadM" type="number"> minutes
+  </section>-->
+
+  <button [disabled]="!form.valid" onclick="onSubmit"></button>
+</form>
