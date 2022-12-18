@@ -3,14 +3,45 @@
   <p><mat-checkbox formControlName="cbxWordCount" id="cbxWordCount">Word Count</mat-checkbox></p>
   <p><mat-checkbox formControlName="cbxPageCount" id="cbxPageCount">Page Count</mat-checkbox></p>
   <p><mat-checkbox formControlName="cbxTimeToRead" id="cbxTimeToRead">Time to Read</mat-checkbox></p>
+  <p><mat-checkbox formControlName="cbxDifficulty" id="cbxDifficulty">Difficulty</mat-checkbox></p>
 
-  <!--<mat-input formControlName="wordCount"></mat-input>
-  <mat-input formControlName="pageCount"></mat-input>-->
+  <div id="wordCountSection" class="form-section" [hidden]="form.controls['cbxWordCount'].value == false">
+    <p>How many words are in the book?</p>
+    <mat-form-field appearance="fill">
+      <mat-label>Enter Word Count</mat-label>
+      <input matInput formControlName="wordCount" type="number" placeholder="13000" />
+    </mat-form-field>
+  </div>
 
-  <!--<section>
-    <input formControlName="timeToReadH" type="number"> hours
-    <input formControlName="timeToReadM" type="number"> minutes
-  </section>-->
+  <div id="pageCountSection" class="form-section" [hidden]="form.controls['cbxPageCount'].value == false">
+    <p>How many pages are in the book?</p>
+    <mat-form-field appearance="fill">
+      <mat-label>Enter Page Count</mat-label>
+      <input matInput formControlName="pageCount" type="number" placeholder="123" />
+    </mat-form-field>
+  </div>
 
-  <button [disabled]="!form.valid" onclick="onSubmit"></button>
+  <div id="timeToReadSection" class="form-section" [hidden]="form.controls['cbxTimeToRead'].value == false">
+    <p>How long did it take you to read from start to finish?</p>
+    <section>
+      <input formControlName="timeToReadH" type="number"> hours
+      <input formControlName="timeToReadM" type="number"> minutes
+    </section>
+  </div>
+
+  <div id="difficultySection" class="form-section" [hidden]="form.controls['cbxDifficulty'].value == false">
+    <p>How difficult was it to read on a scale from 1 to 10?</p>
+
+    <label class="example-value-label">{{form.controls['difficulty'].value}} - You found this book <span>{{ getDifficultyStr(form.controls['difficulty'].value) }}</span> to read.</label>
+    <mat-slider [max]="10"
+                [min]="0"
+                [step]="1">
+      <input formControlName="difficulty" />
+    </mat-slider>
+  </div>
+
+  <div class="btn-row">
+    <button mat-button color="secondary" (click)="onReset()">Reset</button>
+    <button mat-raised-button color="primary" [disabled]="!form.valid" (click)="onSubmit()">Submit</button>
+  </div>
 </form>

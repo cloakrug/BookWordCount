@@ -12,11 +12,13 @@ export class WordCountFormComponent implements OnInit {
     cbxWordCount: new FormControl(true),
     cbxPageCount: new FormControl(false),
     cbxTimeToRead: new FormControl(false),
+    cbxDifficulty: new FormControl(false),
     edition: new FormControl(''),
     wordCount: new FormControl('', [ Validators.pattern("^[0-9]*$")]), // Ensure number 
     pageCount: new FormControl('', [ Validators.pattern("^[0-9]*$")]), // Ensure number
     timeToReadH: new FormControl(0, [ Validators.pattern("^[0-9]*$")]), // A lot of sites don't have this already
-    timeToReadM: new FormControl(0, [ Validators.pattern("^[0-9]*$")]), 
+    timeToReadM: new FormControl(0, [ Validators.pattern("^[0-9]*$")]),
+    difficulty: new FormControl(0, [Validators.pattern("^[0-9]*$")]),
     comment: new FormControl('', Validators.minLength(10)),
   });
   
@@ -31,10 +33,32 @@ export class WordCountFormComponent implements OnInit {
   public onSubmit(): void {
     console.log(this.form.value);
 
+    console.log(this.form.controls['difficulty'].value)
+
     // Ensure that the form is valid
     if (this.form.valid) {
       
     }
+  }
+
+  public onReset(): void {
+    console.log('in onReset()')
+  }
+
+  public getDifficultyStr(difficulty: number): string {
+    let str = '';
+
+    if (difficulty < 3) {
+      str = 'Easy';
+    } else if (difficulty < 6) {
+      str = 'Medium';
+    } else if (difficulty < 9) {
+      str = 'Hard';
+    } else {
+      str = 'Very Hard';
+    }
+
+    return str;
   }
 
 }

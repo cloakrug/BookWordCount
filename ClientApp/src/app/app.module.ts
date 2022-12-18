@@ -19,6 +19,8 @@ import { NameComponentComponent } from './name-component/name-component.componen
 import { BookService } from './services/book.service';
 import { WordCountFormComponent } from './word-count-form/word-count-form.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSliderModule } from '@angular/material/slider';
 
 @NgModule({
   declarations: [
@@ -39,6 +41,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     FormsModule,
     ReactiveFormsModule,
     MatFormFieldModule,
+    MatButtonModule,
+    MatSliderModule,
     MatInputModule,
     MatCheckboxModule,
     RouterModule.forRoot([
