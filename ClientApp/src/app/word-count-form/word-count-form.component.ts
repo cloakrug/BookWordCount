@@ -16,8 +16,8 @@ export class WordCountFormComponent implements OnInit {
     edition: new FormControl(''),
     wordCount: new FormControl('', [ Validators.pattern("^[0-9]*$")]), // Ensure number 
     pageCount: new FormControl('', [ Validators.pattern("^[0-9]*$")]), // Ensure number
-    timeToReadH: new FormControl(0, [ Validators.pattern("^[0-9]*$")]), // A lot of sites don't have this already
-    timeToReadM: new FormControl(0, [ Validators.pattern("^[0-9]*$")]),
+    timeToReadH: new FormControl('', [ Validators.pattern("^[0-9]*$")]), // A lot of sites don't have this already
+    timeToReadM: new FormControl('', [ Validators.pattern("^[0-9]*$")]),
     difficulty: new FormControl(0, [Validators.pattern("^[0-9]*$")]),
     comment: new FormControl('', Validators.minLength(10)),
   });

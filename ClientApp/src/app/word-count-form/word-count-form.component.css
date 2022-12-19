@@ -5,7 +5,7 @@
   border: none;
   border-radius: 0.5rem;
   /* offset-x | offset-y | blur-radius | color */
-  box-shadow: 0 0 15px hsla(0, 0%, 60%, 1);
+  box-shadow: 0 0 15px hsla(0, 0%, 60%, 0.8);
   padding: 2rem 4rem;
 }
 
@@ -52,4 +52,8 @@
 
 .form-section {
     margin-bottom: 1.5rem;
+}
+
+.small-number-input {
+    width: 5rem;
 }

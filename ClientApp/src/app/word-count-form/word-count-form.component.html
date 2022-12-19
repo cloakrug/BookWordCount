@@ -17,23 +17,28 @@
   </div>
 
   <div id="pageCountSection" class="form-section" [hidden]="form.controls['cbxPageCount'].value == false">
-    <mat-form-field appearance="fill" style="margin-bottom: -1.34375em">
+    <mat-form-field appearance="fill">
       <mat-label>Enter Page Count</mat-label>
       <input matInput formControlName="pageCount" type="number" placeholder="123" />
     </mat-form-field>
   </div>
 
   <div id="timeToReadSection" class="form-section" [hidden]="form.controls['cbxTimeToRead'].value == false">
-    <p>How long did it take you to read from start to finish?</p>
+    <label>How long did it take you to read from start to finish?</label>
     <section>
-      <input formControlName="timeToReadH" type="number"> hours
-      <input formControlName="timeToReadM" type="number"> minutes
+      <mat-form-field appearance="fill" class="small-number-input">
+        <input matInput type="number" formControlName="timeToReadH" placeholder="4">
+      </mat-form-field>
+      Hours
+      <mat-form-field appearance="fill" class="small-number-input">
+        <input matInput type="number" formControlName="timeToReadM" placeholder="56">
+      </mat-form-field>
+      Minutes
     </section>
   </div>
 
   <div id="difficultySection" class="form-section" [hidden]="form.controls['cbxDifficulty'].value == false">
-    <p>How difficult was it to read on a scale from 1 to 10?</p>
-
+    <label>How difficult was it to read on a scale from 1 to 10?</label>
     <div class="slider-with-text-row">
       <mat-slider [max]="10"
                   [min]="0"
@@ -53,7 +58,7 @@
     </div>
   </div>
 
-  <div class="btn-row">
+  <div class="btn-row" style="margin-top: 2.5rem;">
     <button mat-button color="secondary" (click)="onReset()">Reset</button>
     <button mat-raised-button color="primary" [disabled]="!form.valid" (click)="onSubmit()">Submit</button>
   </div>
