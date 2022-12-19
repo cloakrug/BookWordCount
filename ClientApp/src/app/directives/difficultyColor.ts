@@ -18,7 +18,5 @@ export class DifficultyColorDirective implements OnChanges {
     } else if (changes.difficultyColor.currentValue?.toLowerCase() === 'very hard') {
       this.element.nativeElement.style.color = '#b31b2f'; // dark red
     }
-
-    this.element.nativeElement.style.fontWeight = 'bold';
   }
 }
