@@ -1,21 +1,23 @@
-<form [formGroup]="form" (ngSubmit)="onSubmit()" class="form">
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="form" >
 
-  <p><mat-checkbox formControlName="cbxWordCount" id="cbxWordCount">Word Count</mat-checkbox></p>
-  <p><mat-checkbox formControlName="cbxPageCount" id="cbxPageCount">Page Count</mat-checkbox></p>
-  <p><mat-checkbox formControlName="cbxTimeToRead" id="cbxTimeToRead">Time to Read</mat-checkbox></p>
-  <p><mat-checkbox formControlName="cbxDifficulty" id="cbxDifficulty">Difficulty</mat-checkbox></p>
+  <h3 class="form-header">Submit Stats</h3>
+
+  <div class="form-section checkbox-row">
+    <p><mat-checkbox formControlName="cbxWordCount" id="cbxWordCount">Word Count</mat-checkbox></p>
+    <p><mat-checkbox formControlName="cbxPageCount" id="cbxPageCount">Page Count</mat-checkbox></p>
+    <p><mat-checkbox formControlName="cbxTimeToRead" id="cbxTimeToRead">Time to Read</mat-checkbox></p>
+    <p><mat-checkbox formControlName="cbxDifficulty" id="cbxDifficulty">Difficulty</mat-checkbox></p>
+  </div>
 
   <div id="wordCountSection" class="form-section" [hidden]="form.controls['cbxWordCount'].value == false">
-    <p>How many words are in the book?</p>
-    <mat-form-field appearance="fill">
+    <mat-form-field appearance="fill" style="margin-bottom: -1.34375em">
       <mat-label>Enter Word Count</mat-label>
       <input matInput formControlName="wordCount" type="number" placeholder="13000" />
     </mat-form-field>
   </div>
 
   <div id="pageCountSection" class="form-section" [hidden]="form.controls['cbxPageCount'].value == false">
-    <p>How many pages are in the book?</p>
-    <mat-form-field appearance="fill">
+    <mat-form-field appearance="fill" style="margin-bottom: -1.34375em">
       <mat-label>Enter Page Count</mat-label>
       <input matInput formControlName="pageCount" type="number" placeholder="123" />
     </mat-form-field>
@@ -40,15 +42,8 @@
     <mat-slider [max]="10"
                 [min]="0"
                 [step]="1"
-                formControlName="difficulty"
-                >
+                formControlName="difficulty">
     </mat-slider>
-
-    <!--<input [value]="difficultySliderVal"
-      (change)="onSliderChange($event, 'difficulty')"
-      (input)="onSliderChange($event, 'difficulty')"
-  />-->
-    <!-- Mat-slider of a reactive form that -->
   </div>
 
   <div class="btn-row">

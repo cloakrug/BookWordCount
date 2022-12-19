@@ -1,6 +1,33 @@
-.btn-row {
-    margin-top: 1rem;
+.form {
+  background-color: hsla(0, 0%, 98%, 1);
+  width: 100%;
+  margin: 0;
+  border: none;
+  border-radius: 0.5rem;
+  /* offset-x | offset-y | blur-radius | color */
+  box-shadow: 0 0 15px hsla(0, 0%, 60%, 1);
+  padding: 2rem 4rem;
+}
+
+.form-header {
     margin-bottom: 1rem;
+}
+
+.checkbox-row {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    max-width: 800px;
+}
+
+.checkbox-row p {
+    min-width: 150px;
+    flex: 1;
+}
+
+.btn-row {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 
 .btn-row button{
@@ -9,5 +36,5 @@
 
 
 .form-section {
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
 }

@@ -11,7 +11,7 @@ export class DifficultyColorDirective implements OnChanges {
   ngOnChanges(changes: SimpleChanges) {
     if (changes.difficultyColor.currentValue?.toLowerCase() === 'easy') {
       this.element.nativeElement.style.color = '#5ee078'; // green
-    } else if (changes.difficultyColor.currentValue?.toLowerCase() === 'medium') {
+    } else if (changes.difficultyColor.currentValue?.toLowerCase() === 'moderately difficult') {
       this.element.nativeElement.style.color = 'orange';
     } else if (changes.difficultyColor.currentValue?.toLowerCase() === 'hard') {
       this.element.nativeElement.style.color = '#de354b'; // light red

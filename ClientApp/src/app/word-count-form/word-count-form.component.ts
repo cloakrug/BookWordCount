@@ -66,7 +66,7 @@ export class WordCountFormComponent implements OnInit {
     if (difficulty < 3) {
       str = 'Easy';
     } else if (difficulty < 6) {
-      str = 'Medium';
+      str = 'Moderately difficult';
     } else if (difficulty < 9) {
       str = 'Hard';
     } else {
