@@ -25,6 +25,21 @@
     flex: 1;
 }
 
+.slider-with-text-row {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+}
+
+.slider-with-text-row mat-slider {
+    margin-right: 1rem;
+}
+
+.slider-with-text-row > * {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
 .btn-row {
   margin-top: 1rem;
   margin-bottom: 1rem;

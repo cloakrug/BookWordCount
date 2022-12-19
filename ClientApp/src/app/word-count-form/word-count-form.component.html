@@ -34,16 +34,23 @@
   <div id="difficultySection" class="form-section" [hidden]="form.controls['cbxDifficulty'].value == false">
     <p>How difficult was it to read on a scale from 1 to 10?</p>
 
-    <p class="example-value-label">
-      <span difficultyColor="{{getDifficultyStr(form.controls['difficulty'].value)}}" style="font-weight: bold">{{form.controls['difficulty'].value}}</span> - You found this book
-      <span difficultyColor="{{getDifficultyStr(form.controls['difficulty'].value)}}" style="font-weight: bold">{{ getDifficultyStr(form.controls['difficulty'].value) }}</span>
-      to read.
-    </p>
-    <mat-slider [max]="10"
-                [min]="0"
-                [step]="1"
-                formControlName="difficulty">
-    </mat-slider>
+    <div class="slider-with-text-row">
+      <mat-slider [max]="10"
+                  [min]="0"
+                  [step]="1"
+                  [thumbLabel]="true"
+                  formControlName="difficulty">
+      </mat-slider>
+
+      <p class="example-value-label">
+        You found this book
+        <span difficultyColor="{{getDifficultyStr(form.controls['difficulty'].value)}}"
+              style="font-weight: bold">
+          {{ getDifficultyStr(form.controls['difficulty'].value) }}
+        </span>
+        to read.
+      </p>
+    </div>
   </div>
 
   <div class="btn-row">
