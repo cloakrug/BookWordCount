@@ -21,6 +21,7 @@ import { WordCountFormComponent } from './word-count-form/word-count-form.compon
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSliderModule } from '@angular/material/slider';
+import { DifficultyColorDirective } from './directives/difficultyColor';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { MatSliderModule } from '@angular/material/slider';
     BrowsePageComponent,
     HomePageComponent,
     NameComponentComponent,
-    WordCountFormComponent
+    WordCountFormComponent,
+    DifficultyColorDirective
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

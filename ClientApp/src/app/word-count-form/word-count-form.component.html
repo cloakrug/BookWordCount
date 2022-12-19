@@ -32,12 +32,23 @@
   <div id="difficultySection" class="form-section" [hidden]="form.controls['cbxDifficulty'].value == false">
     <p>How difficult was it to read on a scale from 1 to 10?</p>
 
-    <label class="example-value-label">{{form.controls['difficulty'].value}} - You found this book <span>{{ getDifficultyStr(form.controls['difficulty'].value) }}</span> to read.</label>
+    <p class="example-value-label">
+      <span difficultyColor="{{getDifficultyStr(form.controls['difficulty'].value)}}">{{form.controls['difficulty'].value}}</span> - You found this book
+      <span difficultyColor="{{getDifficultyStr(form.controls['difficulty'].value)}}">{{ getDifficultyStr(form.controls['difficulty'].value) }}</span>
+      to read.
+    </p>
     <mat-slider [max]="10"
                 [min]="0"
-                [step]="1">
-      <input formControlName="difficulty" />
+                [step]="1"
+                formControlName="difficulty"
+                >
     </mat-slider>
+
+    <!--<input [value]="difficultySliderVal"
+      (change)="onSliderChange($event, 'difficulty')"
+      (input)="onSliderChange($event, 'difficulty')"
+  />-->
+    <!-- Mat-slider of a reactive form that -->
   </div>
 
   <div class="btn-row">

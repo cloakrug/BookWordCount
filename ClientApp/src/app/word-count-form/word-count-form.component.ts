@@ -21,6 +21,8 @@ export class WordCountFormComponent implements OnInit {
     difficulty: new FormControl(0, [Validators.pattern("^[0-9]*$")]),
     comment: new FormControl('', Validators.minLength(10)),
   });
+
+  //public difficultySliderVal: number = 0;
   
   constructor() {
     console.log('in WordCountFormComponent constructor');
@@ -28,6 +30,7 @@ export class WordCountFormComponent implements OnInit {
   
   ngOnInit(): void {
     console.log('in WordCountFormComponent ngOnInit');
+    //this.difficultySliderVal = this.form.controls['difficulty'].value;
   }
 
   public onSubmit(): void {
@@ -45,6 +48,18 @@ export class WordCountFormComponent implements OnInit {
     console.log('in onReset()')
   }
 
+  //public onSliderChange($event: any, sliderName: string) {
+  //  console.log('in onSliderChange')
+  //  console.log($event)
+  //  switch (sliderName) {
+  //    case 'difficulty':
+  //      this.difficultySliderVal = parseInt($event.value);
+  //      console.log('setting difficultySliderVal to: ' + this.difficultySliderVal)
+  //      this.form?.get('difficulty')?.setValue(this.difficultySliderVal);
+  //      break;
+  //  }
+  //}
+
   public getDifficultyStr(difficulty: number): string {
     let str = '';
 
@@ -60,5 +75,7 @@ export class WordCountFormComponent implements OnInit {
 
     return str;
   }
+
+  // TODO: generate pipe (or directive) to make the text the correct color
 
 }
