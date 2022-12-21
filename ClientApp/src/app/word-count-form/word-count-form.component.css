@@ -43,12 +43,13 @@
 .btn-row {
   margin-top: 1rem;
   margin-bottom: 1rem;
+  display: flex;
+  flex-direction: row-reverse;
 }
 
 .btn-row button{
-    margin-right: 1rem;
+    margin-left: 1rem;
 }
-
 
 .form-section {
     margin-bottom: 1.5rem;
