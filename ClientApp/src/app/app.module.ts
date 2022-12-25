@@ -51,7 +51,7 @@ import { DifficultyColorDirective } from './directives/difficultyColor';
       { path: "browse", component: BrowsePageComponent },
       { path: "about", component: AboutPageComponent },
       { path: "book/:id", component: BookPageComponent },
-      { path: "", component: HomePageComponent, pathMatch: 'full' },
+      { path: "", component: HomePageComponent, pathMatch: 'full' },  // pathMatch: 'full' as PathMatch  https://stackoverflow.com/questions/73964138/angular-14-pathmatch-type-string-is-not-assignable-to-type-full-prefix
       { path: '**', component: NotFoundComponent }
     ]),
     BrowserAnimationsModule
