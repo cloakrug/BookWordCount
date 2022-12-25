@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'word-count-form',
@@ -8,18 +8,18 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class WordCountFormComponent implements OnInit {
 
-  public form: FormGroup = new FormGroup({
-    cbxWordCount: new FormControl(true),
-    cbxPageCount: new FormControl(false),
-    cbxTimeToRead: new FormControl(false),
-    cbxDifficulty: new FormControl(false),
-    edition: new FormControl(''),
-    wordCount: new FormControl('', [ Validators.pattern("^[0-9]*$")]), // Ensure number 
-    pageCount: new FormControl('', [ Validators.pattern("^[0-9]*$")]), // Ensure number
-    timeToReadH: new FormControl('', [ Validators.pattern("^[0-9]*$")]), // A lot of sites don't have this already
-    timeToReadM: new FormControl('', [ Validators.pattern("^[0-9]*$")]),
-    difficulty: new FormControl(0, [Validators.pattern("^[0-9]*$")]),
-    comment: new FormControl('', Validators.minLength(10)),
+  public form: UntypedFormGroup = new UntypedFormGroup({
+    cbxWordCount: new UntypedFormControl(true),
+    cbxPageCount: new UntypedFormControl(false),
+    cbxTimeToRead: new UntypedFormControl(false),
+    cbxDifficulty: new UntypedFormControl(false),
+    edition: new UntypedFormControl(''),
+    wordCount: new UntypedFormControl('', [ Validators.pattern("^[0-9]*$")]), // Ensure number 
+    pageCount: new UntypedFormControl('', [ Validators.pattern("^[0-9]*$")]), // Ensure number
+    timeToReadH: new UntypedFormControl('', [ Validators.pattern("^[0-9]*$")]), // A lot of sites don't have this already
+    timeToReadM: new UntypedFormControl('', [ Validators.pattern("^[0-9]*$")]),
+    difficulty: new UntypedFormControl(0, [Validators.pattern("^[0-9]*$")]),
+    comment: new UntypedFormControl('', Validators.minLength(10)),
   });
 
   //public difficultySliderVal: number = 0;
