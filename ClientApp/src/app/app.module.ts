@@ -23,6 +23,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSliderModule } from '@angular/material/slider';
 import { DifficultyColorDirective } from './directives/difficultyColor';
 import { AuthModule, LogLevel } from 'angular-auth-oidc-client';
+import { LoginPageComponent } from './login-page/login-page.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { AuthModule, LogLevel } from 'angular-auth-oidc-client';
     HomePageComponent,
     NameComponentComponent,
     WordCountFormComponent,
-    DifficultyColorDirective
+    DifficultyColorDirective,
+    LoginPageComponent
   ],
   imports: [
     AuthModule.forRoot({
@@ -65,6 +67,7 @@ import { AuthModule, LogLevel } from 'angular-auth-oidc-client';
       { path: "browse", component: BrowsePageComponent },
       { path: "about", component: AboutPageComponent },
       { path: "book/:id", component: BookPageComponent },
+      { path: "login", component: LoginPageComponent },
       { path: "", component: HomePageComponent, pathMatch: 'full' },  // pathMatch: 'full' as PathMatch  https://stackoverflow.com/questions/73964138/angular-14-pathmatch-type-string-is-not-assignable-to-type-full-prefix
       { path: '**', component: NotFoundComponent }
     ]),

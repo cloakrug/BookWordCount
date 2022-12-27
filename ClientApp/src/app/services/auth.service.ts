@@ -9,10 +9,15 @@ import { map } from 'rxjs/operators';
 export class AuthService {
   constructor(private oidcService: OidcSecurityService) { }
 
-  isLoggedIn(): Observable<boolean> {
+  public isLoggedIn(): Observable<boolean> {
     return this.oidcService.isAuthenticated$
       .pipe(map((authenticatedRes: AuthenticatedResult): boolean => {
         return authenticatedRes.isAuthenticated;
       }));
+  }
+
+  public signOutExternal() {
+    console.log("removing token");
+    localStorage.removeItem("token");
   }
 }

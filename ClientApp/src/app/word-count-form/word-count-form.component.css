@@ -1,17 +1,4 @@
-.form {
-  background-color: hsla(0, 0%, 98%, 1);
-  width: 100%;
-  margin: 0;
-  border: none;
-  border-radius: 0.5rem;
-  /* offset-x | offset-y | blur-radius | color */
-  box-shadow: 0 0 15px hsla(0, 0%, 60%, 0.8);
-  padding: 2rem 4rem;
-}
 
-.form-header {
-    margin-bottom: 1rem;
-}
 
 .checkbox-row {
     display: flex;
