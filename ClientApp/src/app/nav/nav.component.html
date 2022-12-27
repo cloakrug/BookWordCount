@@ -1,5 +1,6 @@
 <nav>
   <a routerLink="/about">About</a>
   <a routerLink="/browse">Browse</a>
-  <a routerLink="/user">User</a>
+  <a *ngIf="displayLoggedIn" routerLink="/user">User</a>
+  <a *ngIf="!displayLoggedIn" routerLink="/login">Login</a>
 </nav>

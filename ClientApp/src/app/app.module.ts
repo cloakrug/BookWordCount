@@ -22,6 +22,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSliderModule } from '@angular/material/slider';
 import { DifficultyColorDirective } from './directives/difficultyColor';
+import { AuthModule, LogLevel } from 'angular-auth-oidc-client';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,19 @@ import { DifficultyColorDirective } from './directives/difficultyColor';
     DifficultyColorDirective
   ],
   imports: [
+    AuthModule.forRoot({
+      config: { 
+        authority: 'https://accounts.google.com',
+        redirectUrl: window.location.origin,
+        postLogoutRedirectUri: window.location.origin,
+        clientId: '2187841631-i1nggnmlq66mepnhi12qnavkpcs91sko.apps.googleusercontent.com',
+        scope: 'openid profile email offline_access',
+        responseType: 'code',
+        silentRenew: true,
+        useRefreshToken: true,
+        logLevel: LogLevel.Debug
+      }
+    }),
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
