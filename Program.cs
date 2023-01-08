@@ -2,8 +2,10 @@ using BookWordCount.Helpers;
 using BookWordCount.Interfaces;
 using BookWordCount.Models;
 using BookWordCount.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Http.Json;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using System.Text.Json;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -39,6 +41,38 @@ builder.Services.AddCors(options =>
                 .AllowAnyOrigin()
                 .AllowAnyMethod();
         });
+});
+
+
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+.AddJwtBearer(options =>
+{
+    options.Authority = "https://accounts.google.com";
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = true,
+        ValidIssuer = "https://accounts.google.com",
+        ValidateAudience = true,
+        ValidAudience = "2187841631-i1nggnmlq66mepnhi12qnavkpcs91sko.apps.googleusercontent.com",
+        ValidateLifetime = true
+    };
+    options.Events = new JwtBearerEvents()
+    {
+        OnAuthenticationFailed = context =>
+        {
+            Console.Write("Authentication Failed");
+            return Task.FromResult(false);
+        },
+        OnForbidden = context =>
+        {
+            Console.Write("Forbidden");
+            return Task.FromResult(false);
+        }
+    };
 });
 
 builder.Services.AddControllers();
@@ -78,6 +112,8 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseCors(MyAllowSpecificOrigins);
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 

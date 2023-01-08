@@ -4,7 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
@@ -24,6 +24,7 @@ import { MatSliderModule } from '@angular/material/slider';
 import { DifficultyColorDirective } from './directives/difficultyColor';
 import { AuthModule, LogLevel } from 'angular-auth-oidc-client';
 import { LoginPageComponent } from './login-page/login-page.component';
+import { TokenInterceptor } from './TokenInterceptor';
 
 @NgModule({
   declarations: [
@@ -73,7 +74,10 @@ import { LoginPageComponent } from './login-page/login-page.component';
     ]),
     BrowserAnimationsModule
   ],
-  providers: [BookService],
+  providers: [
+    BookService,
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -8,15 +8,25 @@ import { AuthService } from '../services/auth.service';
 })
 export class LoginPageComponent implements OnInit {
 
-  constructor(/*private authService: AuthService*/) { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
+    this.authService.googleLibraryLoaded$().subscribe((res: boolean) => {
+      if (res) {
+        console.log('googleLibraryLoaded$ returned true');
+        this.renderLoginButton();
+      } else {
+        console.log('googleLibraryLoaded$ returned false');
+      }
+    });
+  }
+
+  public renderLoginButton() {
     // @ts-ignore
     google.accounts.id.renderButton(
-      // @ts-ignore
+      // @ts-ignore 
       document.getElementById('loginWithGoogleBtn'),
       { theme: 'outline', size: 'large', width: '100%' }
     );
   }
-
 }

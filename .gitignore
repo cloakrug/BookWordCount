@@ -365,3 +365,4 @@ FodyWeavers.xsd
 .angular/
 
 DesignTimeBuild/
+/.vs/BookWordCount/DesignTimeBuild/

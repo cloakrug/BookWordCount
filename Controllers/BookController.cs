@@ -5,6 +5,7 @@ using AutoMapper;
 using BookWordCount.Models;
 using BookWordCount.Services;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace BookWordCount.Controllers
 {
@@ -32,6 +33,13 @@ namespace BookWordCount.Controllers
         [HttpGet("{id}", Name = "GetBookById")]
         public IActionResult Get(int id)
         {
+            var userid = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            if (userid == null)
+            {
+                return Unauthorized();
+            }
+            
             var book = _bookService.GetBook(id);
 
             if (book == null) return NotFound();

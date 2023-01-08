@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { OidcSecurityService } from 'angular-auth-oidc-client';
 import { CredentialResponse } from 'google-one-tap';
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +10,7 @@ import { CredentialResponse } from 'google-one-tap';
 export class AppComponent implements OnInit {
   title = 'app';
 
-  constructor(public oidcSecurityService: OidcSecurityService) {
+  constructor(public oidcSecurityService: OidcSecurityService, public authService: AuthService) {
     this.oidcSecurityService.checkAuth().subscribe(({ isAuthenticated, userData, accessToken, idToken }) => {
       console.log('app authenticated', isAuthenticated);
       console.log('app userData', userData);
@@ -31,6 +32,8 @@ export class AppComponent implements OnInit {
         auto_select: false,
         cancel_on_tap_outside: false
       });
+
+      this.authService.googleLibraryLoadedDataSource.next(true);  // TODO: refactor
     };
   }
 
@@ -38,6 +41,7 @@ export class AppComponent implements OnInit {
     // Decoding  JWT token...
     let decodedToken: any | null = null;
     try {
+      this.authService.setBearerToken(response.credential);
       decodedToken = JSON.parse(atob(response?.credential.split('.')[1]));
     } catch (e) {
       console.error('Error while trying to decode token', e);

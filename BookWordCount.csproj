@@ -11,6 +11,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.12" />
 		<PackageReference Include="Microsoft.AspNetCore.Cors" Version="2.2.0" />
 		<PackageReference Include="Microsoft.AspNetCore.SpaProxy" Version="6.0.3" />
 		<PackageReference Include="AutoMapper" Version="11.0.1" />
@@ -32,12 +33,14 @@
 	  <None Remove="ClientApp\src\app\models\book.ts" />
 	  <None Remove="ClientApp\src\app\models\genre.ts" />
 	  <None Remove="ClientApp\src\app\search-bar\searchresult.ts" />
+	  <None Remove="ClientApp\src\app\TokenInterceptor.ts" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <TypeScriptCompile Include="ClientApp\src\app\models\book.ts" />
 	  <TypeScriptCompile Include="ClientApp\src\app\models\genre.ts" />
 	  <TypeScriptCompile Include="ClientApp\src\app\models\searchresult.ts" />
+	  <TypeScriptCompile Include="ClientApp\src\app\TokenInterceptor.ts" />
 	</ItemGroup>
 
 	<Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
