@@ -15,6 +15,9 @@ namespace BookWordCount.Models
         public DbSet<MajorGenre> MajorGenres { get; set; } = null!;
         public DbSet<PageCount> PageCounts { get; set; } = null!;
         public DbSet<WordCount> WordCounts { get; set; } = null!;
+        public DbSet<Duration> Durations { get; set; } = null!;
+        public DbSet<Difficulty> DifficultyStats { get; set; } = null!;
         public DbSet<User> Users { get; set; } = null!;
     }
+
 }
