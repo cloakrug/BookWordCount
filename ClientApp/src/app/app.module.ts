@@ -25,6 +25,7 @@ import { DifficultyColorDirective } from './directives/difficultyColor';
 import { AuthModule, LogLevel } from 'angular-auth-oidc-client';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { TokenInterceptor } from './TokenInterceptor';
+import { SigninBannerComponent } from './signin-banner/signin-banner.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { TokenInterceptor } from './TokenInterceptor';
     NameComponentComponent,
     WordCountFormComponent,
     DifficultyColorDirective,
-    LoginPageComponent
+    LoginPageComponent,
+    SigninBannerComponent
   ],
   imports: [
     AuthModule.forRoot({

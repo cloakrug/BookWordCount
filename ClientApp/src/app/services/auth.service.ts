@@ -8,14 +8,18 @@ import { map } from 'rxjs/operators';
 })
 export class AuthService {
   public googleLibraryLoadedDataSource: BehaviorSubject<boolean> = new BehaviorSubject(false);
+  public tokenDataSource: BehaviorSubject<string> = new BehaviorSubject("");
 
-  constructor(private oidcService: OidcSecurityService) { }
+  constructor(private oidcService: OidcSecurityService) {
+    this.googleLibraryLoaded$().subscribe((loaded: boolean) => {
+      if (loaded) {
+        this.tokenDataSource.next(this.getBearerToken());
+      } 
+    });
+  }
 
   public isLoggedIn(): Observable<boolean> {
-    return this.oidcService.isAuthenticated$
-      .pipe(map((authenticatedRes: AuthenticatedResult): boolean => {
-        return authenticatedRes.isAuthenticated;
-      }));
+    return this.tokenDataSource.pipe(map(token => token !== null && token !== undefined && token !== "" ));
   }
 
   public googleLibraryLoaded(): boolean {
@@ -32,11 +36,13 @@ export class AuthService {
   }
 
   public setBearerToken(token: string) {
+    this.tokenDataSource.next(token);
     localStorage.setItem("token", token)
   }
 
   public signOutExternal() {
     console.log("removing token");
+    this.tokenDataSource.next("");
     localStorage.removeItem("token");
   }
 }

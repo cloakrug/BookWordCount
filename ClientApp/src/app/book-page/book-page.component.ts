@@ -2,6 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Book } from '../models/book';
+import { AuthService } from '../services/auth.service';
 import { BookService } from '../services/book.service';
 
 @Component({
@@ -13,10 +14,12 @@ export class BookPageComponent implements OnInit {
 
   public book: Book | null = null;
   public errorGettingBook: boolean = false;
+  public displayLoginBanner: boolean = false;
 
   constructor(
     private bookService: BookService,
-    private route: ActivatedRoute
+    private authService: AuthService,
+    private route: ActivatedRoute,
   ) { }
 
   ngOnInit(): void {
@@ -33,6 +36,11 @@ export class BookPageComponent implements OnInit {
           (res: Book) => this.book = res,
           (err: HttpErrorResponse) => this.handleGetBookError(err)
         );
+    });
+
+    this.authService.isLoggedIn().subscribe(isLoggedIn => {
+      console.log('in BookPageComponent, got isLoggedIn: ' + isLoggedIn);
+      this.displayLoginBanner = !isLoggedIn;
     });
   }
 
