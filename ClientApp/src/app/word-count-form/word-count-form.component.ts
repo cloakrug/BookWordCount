@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormArray, FormGroup, UntypedFormControl, UntypedFormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 
 @Component({
   selector: 'word-count-form',
@@ -7,22 +7,23 @@ import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms
   styleUrls: ['./word-count-form.component.css']
 })
 export class WordCountFormComponent implements OnInit {
+  // TODO: @Output when the form has been successfully submitted
 
+  // TODO: make untyped typed
   public form: UntypedFormGroup = new UntypedFormGroup({
     cbxWordCount: new UntypedFormControl(true),
     cbxPageCount: new UntypedFormControl(false),
     cbxTimeToRead: new UntypedFormControl(false),
     cbxDifficulty: new UntypedFormControl(false),
     edition: new UntypedFormControl(''),
-    wordCount: new UntypedFormControl('', [ Validators.pattern("^[0-9]*$")]), // Ensure number 
-    pageCount: new UntypedFormControl('', [ Validators.pattern("^[0-9]*$")]), // Ensure number
-    timeToReadH: new UntypedFormControl('', [ Validators.pattern("^[0-9]*$")]), // A lot of sites don't have this already
-    timeToReadM: new UntypedFormControl('', [ Validators.pattern("^[0-9]*$")]),
-    difficulty: new UntypedFormControl(0, [Validators.pattern("^[0-9]*$")]),
-    comment: new UntypedFormControl('', Validators.minLength(10)),
+    wordCount: new UntypedFormControl('', [Validators.pattern("^[0-9]*$"), Validators.min(1)]), // Ensure number 
+    pageCount: new UntypedFormControl('', [Validators.pattern("^[0-9]*$"), Validators.min(1)]), 
+    time: new UntypedFormGroup({
+      hours: new UntypedFormControl('', [Validators.pattern("^\s*[0-9]*\s*$")]), // Ensure number or whitespace
+      minutes: new UntypedFormControl('', [Validators.pattern("^\s*[0-9]*\s*$")]),
+    }, this.nonZeroTimeValidator()),      
+    difficulty: new UntypedFormControl(0, [Validators.pattern("^[0-9]*$"), Validators.min(0)]),
   });
-
-  //public difficultySliderVal: number = 0;
   
   constructor() {
     console.log('in WordCountFormComponent constructor');
@@ -30,8 +31,31 @@ export class WordCountFormComponent implements OnInit {
   
   ngOnInit(): void {
     console.log('in WordCountFormComponent ngOnInit');
-    //this.difficultySliderVal = this.form.controls['difficulty'].value;
+    this.form.controls["cbxWordCount"].valueChanges.subscribe(() => this.onCheckboxValueChange());
+    this.form.controls["cbxPageCount"].valueChanges.subscribe(() => this.onCheckboxValueChange());
+    this.form.controls["cbxTimeToRead"].valueChanges.subscribe(() => this.onCheckboxValueChange());
+    this.form.controls["cbxDifficulty"].valueChanges.subscribe(() => this.onCheckboxValueChange());
+    this.onCheckboxValueChange(); // to ensure correct start state
   }
+
+  private onCheckboxValueChange(): void {
+    const checkboxNameToStatControl = new Map<string, string>();
+    checkboxNameToStatControl.set('cbxWordCount', 'wordCount');
+    checkboxNameToStatControl.set('cbxPageCount', 'pageCount');
+    checkboxNameToStatControl.set('cbxDifficulty', 'difficulty');
+
+    for (const [checkboxName, statControlName] of checkboxNameToStatControl) {
+      if (this.form.controls[checkboxName].value === true) {
+        this.form.controls[statControlName].addValidators(Validators.required);
+      } else {
+        this.form.controls[statControlName].removeValidators(Validators.required);
+      }
+    }
+
+    this.form.get('time')?.updateValueAndValidity();  // Needed because it's not automatically checked
+  }
+
+  
 
   public onSubmit(): void {
     console.log(this.form.value);
@@ -47,18 +71,6 @@ export class WordCountFormComponent implements OnInit {
   public onReset(): void {
     console.log('in onReset()')
   }
-
-  //public onSliderChange($event: any, sliderName: string) {
-  //  console.log('in onSliderChange')
-  //  console.log($event)
-  //  switch (sliderName) {
-  //    case 'difficulty':
-  //      this.difficultySliderVal = parseInt($event.value);
-  //      console.log('setting difficultySliderVal to: ' + this.difficultySliderVal)
-  //      this.form?.get('difficulty')?.setValue(this.difficultySliderVal);
-  //      break;
-  //  }
-  //}
 
   public getDifficultyStr(difficulty: number): string {
     let str = '';
@@ -76,6 +88,23 @@ export class WordCountFormComponent implements OnInit {
     return str;
   }
 
-  // TODO: generate pipe (or directive) to make the text the correct color
+  private nonZeroTimeValidator(): ValidatorFn {
+    return (timeGroup: AbstractControl): ValidationErrors | null => {
+      if (!this.form?.get('cbxTimeToRead')?.value) return null;
 
+      let minutesStr: string = timeGroup?.get('minutes')?.value;
+      let hoursStr: string = timeGroup?.get('hours')?.value;
+      
+      let minutes = isNaN(parseInt(minutesStr)) ? 0 : parseInt(minutesStr);
+      let hours = isNaN(parseInt(hoursStr)) ? 0 : parseInt(hoursStr);
+
+      let totalSeconds = hours * 60 + minutes;
+
+      if (totalSeconds === 0) {
+        return { zeroTime: true };
+      } else {
+        return null;
+      }
+    };
+  }
 }
