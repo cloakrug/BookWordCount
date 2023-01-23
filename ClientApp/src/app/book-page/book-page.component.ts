@@ -33,7 +33,10 @@ export class BookPageComponent implements OnInit {
 
       this.bookService.getBookById(bookId)
         .subscribe(
-          (res: Book) => this.book = res,
+          (res: Book) => {
+            console.log('got book: ', res)
+            this.book = res
+          },
           (err: HttpErrorResponse) => this.handleGetBookError(err)
         );
     });

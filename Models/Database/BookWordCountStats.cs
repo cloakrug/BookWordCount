@@ -5,7 +5,7 @@ namespace BookWordCount.Models.Database
     public class BookWordCountStats
     {
         [Key]
-        public int BookId { get; set; }
+        public string BookId { get; set; }
         public double AverageWordCount { get; set; }
         public int TotalCountsSubmitted { get; set; }
     }

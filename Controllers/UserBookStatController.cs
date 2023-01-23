@@ -1,6 +1,7 @@
 ﻿using BookWordCount.Interfaces;
 using BookWordCount.Models.Dtos;
 using BookWordCount.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
@@ -35,7 +36,7 @@ namespace BookWordCount.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetBookStatsForCurrentUser(int bookId)
+        public IActionResult GetBookStatsForCurrentUser(string bookId)
         {
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
@@ -51,6 +52,7 @@ namespace BookWordCount.Controllers
             return Ok(userBookStat);
         }
 
+        [Authorize]
         [HttpPost]
         public IActionResult Add(UserBookStatsDto stats)
         {

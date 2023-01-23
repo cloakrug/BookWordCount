@@ -31,7 +31,7 @@ namespace BookWordCount.Controllers
         }
 
         [HttpGet("{id}", Name = "GetBookById")]
-        public IActionResult Get(int id)
+        public IActionResult Get(string id)
         {
             var book = _bookService.GetBook(id);
 
@@ -76,7 +76,7 @@ namespace BookWordCount.Controllers
         }
 
         [HttpDelete("Delete/{id}", Name = nameof(Delete))]
-        public IActionResult Delete(int id)
+        public IActionResult Delete(string id)
         {
             return Ok(_bookService.DeleteBook(id));
         }

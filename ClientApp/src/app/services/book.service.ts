@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Book } from '../models/book';
+import { BookStatsModel } from '../models/bookstatsmodel';
 import { SearchResult } from '../models/searchresult';
 
 @Injectable({
@@ -23,5 +24,9 @@ export class BookService {
 
   public getBookById(id: string): Observable<Book> {
     return this.http.get<Book>(`https://localhost:7041/Book/${id}`);
+  }
+
+  public addStats(model: BookStatsModel): Observable<BookStatsModel> {
+    return this.http.post<BookStatsModel>(`https://localhost:7041/UserBookStat/Add`, model);
   }
 }

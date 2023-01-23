@@ -10,6 +10,7 @@ namespace BookWordCount.Models.Database
         public int TimeInSeconds { get; set; }
         public DateTime Created { get; set; }
         public DateTime LastModified { get; set; }
+        public string BookId { get; set; }
         virtual public Book Book { get; set; }
     }
 }

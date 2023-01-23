@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormArray, FormGroup, UntypedFormControl, UntypedFormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { Component, Input, OnInit } from '@angular/core';
+import { AbstractControl, FormArray, FormControl, FormGroup, UntypedFormControl, UntypedFormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { BookStatsModel } from '../models/bookstatsmodel';
+import { BookService } from '../services/book.service';
 
 @Component({
   selector: 'word-count-form',
@@ -7,33 +9,38 @@ import { AbstractControl, FormArray, FormGroup, UntypedFormControl, UntypedFormG
   styleUrls: ['./word-count-form.component.css']
 })
 export class WordCountFormComponent implements OnInit {
+  @Input('bookId') bookId: string = '';
+  
   // TODO: @Output when the form has been successfully submitted
 
   // TODO: make untyped typed
-  public form: UntypedFormGroup = new UntypedFormGroup({
-    cbxWordCount: new UntypedFormControl(true),
-    cbxPageCount: new UntypedFormControl(false),
-    cbxTimeToRead: new UntypedFormControl(false),
-    cbxDifficulty: new UntypedFormControl(false),
-    edition: new UntypedFormControl(''),
-    wordCount: new UntypedFormControl('', [Validators.pattern("^[0-9]*$"), Validators.min(1)]), // Ensure number 
-    pageCount: new UntypedFormControl('', [Validators.pattern("^[0-9]*$"), Validators.min(1)]), 
-    time: new UntypedFormGroup({
-      hours: new UntypedFormControl('', [Validators.pattern("^\s*[0-9]*\s*$")]), // Ensure number or whitespace
-      minutes: new UntypedFormControl('', [Validators.pattern("^\s*[0-9]*\s*$")]),
+  public form: FormGroup = new FormGroup({
+    cbxWordCount: new FormControl(true),
+    cbxPageCount: new FormControl(false),
+    cbxDuration: new FormControl(false),
+    cbxDifficulty: new FormControl(false),
+    edition: new FormControl(''),
+    wordCount: new FormControl('', [Validators.pattern("^[0-9]*$"), Validators.min(1)]), // Ensure number 
+    pageCount: new FormControl('', [Validators.pattern("^[0-9]*$"), Validators.min(1)]), 
+    duration: new FormGroup({
+      hours: new FormControl('', [Validators.pattern("^\s*[0-9]*\s*$")]), // Ensure number or whitespace
+      minutes: new FormControl('', [Validators.pattern("^\s*[0-9]*\s*$")]),
     }, this.nonZeroTimeValidator()),      
-    difficulty: new UntypedFormControl(0, [Validators.pattern("^[0-9]*$"), Validators.min(0)]),
+    difficulty: new FormControl(0, [Validators.pattern("^[0-9]*$"), Validators.min(0)]),
   });
   
-  constructor() {
-    console.log('in WordCountFormComponent constructor');
-  }
+  constructor(private bookService: BookService) { }
   
   ngOnInit(): void {
+    console.log('in WordCountFormComponent constructor');
+    console.log('bookId: ', this.bookId)
+
+    if (this.bookId === null || this.bookId === undefined || this.bookId.trim() === '') throw new Error('bookId was not passed');
+
     console.log('in WordCountFormComponent ngOnInit');
     this.form.controls["cbxWordCount"].valueChanges.subscribe(() => this.onCheckboxValueChange());
     this.form.controls["cbxPageCount"].valueChanges.subscribe(() => this.onCheckboxValueChange());
-    this.form.controls["cbxTimeToRead"].valueChanges.subscribe(() => this.onCheckboxValueChange());
+    this.form.controls["cbxDuration"].valueChanges.subscribe(() => this.onCheckboxValueChange());
     this.form.controls["cbxDifficulty"].valueChanges.subscribe(() => this.onCheckboxValueChange());
     this.onCheckboxValueChange(); // to ensure correct start state
   }
@@ -52,19 +59,49 @@ export class WordCountFormComponent implements OnInit {
       }
     }
 
-    this.form.get('time')?.updateValueAndValidity();  // Needed because it's not automatically checked
+    this.form.get('duration')?.updateValueAndValidity();  // Needed because it's not automatically checked
   }
 
   
-
+  
   public onSubmit(): void {
     console.log(this.form.value);
-
     console.log(this.form.controls['difficulty'].value)
+
+    if (this.bookId === undefined || this.bookId === null) {
+      throw new Error('bookId is not defined');
+    }
+
+    const durationGroup = this.form.get('duration');
+
+    if (durationGroup === null || durationGroup === undefined) {
+      throw new Error('durationGroup is not defined');
+    }
 
     // Ensure that the form is valid
     if (this.form.valid) {
-      
+
+      const model: BookStatsModel = {
+        BookId: this.bookId
+      };
+
+      if (this.form.get('cbxWordCount')?.value) {
+        model.wordCount = this.form.get('wordCount')?.value;
+      }
+
+      if (this.form.get('cbxPageCount')?.value) {
+        model.pageCount = this.form.get('pageCount')?.value;
+      }
+
+      if (this.form.get('cbxDuration')?.value) {
+        model.durationInSeconds = this.getDurationInSeconds(durationGroup);
+      }
+
+      if (this.form.get('cbxDifficulty')?.value) {
+        model.difficulty = this.form.get('difficulty')?.value;
+      }
+
+      this.bookService.addStats(model).subscribe(res => console.log(res));
     }
   }
 
@@ -89,16 +126,10 @@ export class WordCountFormComponent implements OnInit {
   }
 
   private nonZeroTimeValidator(): ValidatorFn {
-    return (timeGroup: AbstractControl): ValidationErrors | null => {
-      if (!this.form?.get('cbxTimeToRead')?.value) return null;
+    return (durationGroup: AbstractControl): ValidationErrors | null => {
+      if (!this.form?.get('cbxDuration')?.value) return null;
 
-      let minutesStr: string = timeGroup?.get('minutes')?.value;
-      let hoursStr: string = timeGroup?.get('hours')?.value;
-      
-      let minutes = isNaN(parseInt(minutesStr)) ? 0 : parseInt(minutesStr);
-      let hours = isNaN(parseInt(hoursStr)) ? 0 : parseInt(hoursStr);
-
-      let totalSeconds = hours * 60 + minutes;
+      const totalSeconds = this.getDurationInSeconds(durationGroup);
 
       if (totalSeconds === 0) {
         return { zeroTime: true };
@@ -106,5 +137,15 @@ export class WordCountFormComponent implements OnInit {
         return null;
       }
     };
+  }
+
+  private getDurationInSeconds(timeGroup: AbstractControl): number {
+    let minutesStr: string = timeGroup?.get('minutes')?.value;
+    let hoursStr: string = timeGroup?.get('hours')?.value;
+
+    let minutes = isNaN(parseInt(minutesStr)) ? 0 : parseInt(minutesStr);
+    let hours = isNaN(parseInt(hoursStr)) ? 0 : parseInt(hoursStr);
+
+    return hours * 60 + minutes;
   }
 }

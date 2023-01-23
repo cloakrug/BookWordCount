@@ -5,7 +5,7 @@ namespace BookWordCount.Models.Database
     public class Book
     {
         [Key] // Don't really need this because Id is made the PK by convention
-        public int Id { get; set; }
+        public string Id { get; set; }
         public string Author { get; set; }
         public string Title { get; set; }
         public DateTime CreatedDate { get; set; }

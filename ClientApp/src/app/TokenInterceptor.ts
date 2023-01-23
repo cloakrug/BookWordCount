@@ -8,7 +8,8 @@ export class TokenInterceptor implements HttpInterceptor {
   constructor(private auth: AuthService) { }
 
   protected protectedRoutePrefixes: string[] = [
-    '/Book/'
+    '/Book/',
+    '/UserBookStat/Add'
   ];
 
   public intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {

@@ -91,12 +91,14 @@ namespace BookWordCount.Services
                 _ctx.Durations.Add(duration);
             }
 
-            _ctx.SaveChanges();
+            _ctx.SaveChanges();   
 
             return userBookStats;
+
+            //problem is that submit is automatically called when you click a button inside. Need to figure out how to remove this functionality. 
         }
 
-        public UserBookStatsDto GetUserBookStats(string userId, int bookId)
+        public UserBookStatsDto GetUserBookStats(string userId, string bookId)
         {
             var wordCount = _ctx.WordCounts
                 .Where(count => count.UserId == userId && count.Book.Id == bookId)

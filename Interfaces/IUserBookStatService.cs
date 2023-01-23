@@ -6,6 +6,6 @@ namespace BookWordCount.Interfaces
     {
         UserBookStatsDto AddUserBookStats(UserBookStatsDto userBookStats);
         AllUserBookStatsDto GetAllUserBookStats(string userId);
-        UserBookStatsDto GetUserBookStats(string userId, int bookId);
+        UserBookStatsDto GetUserBookStats(string userId, string bookId);
     }
 }

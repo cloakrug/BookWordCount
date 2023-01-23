@@ -5,7 +5,7 @@
   <div class="form-section checkbox-row">
     <p><mat-checkbox formControlName="cbxWordCount" id="cbxWordCount">Word Count</mat-checkbox></p>
     <p><mat-checkbox formControlName="cbxPageCount" id="cbxPageCount">Page Count</mat-checkbox></p>
-    <p><mat-checkbox formControlName="cbxTimeToRead" id="cbxTimeToRead">Time to Read</mat-checkbox></p>
+    <p><mat-checkbox formControlName="cbxDuration" id="cbxDuration">Time to Read</mat-checkbox></p>
     <p><mat-checkbox formControlName="cbxDifficulty" id="cbxDifficulty">Difficulty</mat-checkbox></p>
   </div>
 
@@ -23,7 +23,7 @@
     </mat-form-field>
   </div>
 
-  <div id="timeToReadSection" class="form-section" formGroupName="time" [hidden]="form.controls['cbxTimeToRead'].value == false">
+  <div id="durationSection" class="form-section" formGroupName="duration" [hidden]="form.controls['cbxDuration'].value == false">
     <label>How long did it take you to read from start to finish?</label>
     <section>
       <mat-form-field appearance="fill" class="small-number-input">
@@ -59,7 +59,7 @@
   </div>
 
   <div class="btn-row" style="margin-top: 2.5rem;">
-    <button mat-raised-button color="primary" [disabled]="!form.valid" (click)="onSubmit()">Submit</button>
-    <button mat-button color="secondary" (click)="onReset()">Reset</button>
+    <button type="submit" mat-raised-button color="primary" [disabled]="!form.valid">Submit</button>
+    <button type="button" mat-button color="secondary" (click)="onReset()">Reset</button>
   </div>
 </form>

@@ -26,7 +26,7 @@ namespace BookWordCount.Services
                 .Include(x => x.MajorGenre);
         }
 
-        public Book? GetBook(int id)
+        public Book? GetBook(string id)
         {
             return _ctx.Books
                 .Include(x => x.Genres)
@@ -97,7 +97,7 @@ namespace BookWordCount.Services
             return book;
         }
 
-        public bool DeleteBook(int id)
+        public bool DeleteBook(string id)
         {
             var entity = _ctx.Books.Find(id);
 

@@ -54,7 +54,7 @@ namespace BookWordCount.Helpers
 
             defaultBooks.Add(new Book()
             {
-                Id = 1,
+                Id = "1",
                 Author = "Cormac McCarthy",
                 Title = "The Road",
                 CreatedDate = DateTime.Now,
@@ -70,7 +70,7 @@ namespace BookWordCount.Helpers
 
             defaultBooks.Add(new Book()
             {
-                Id = 2,
+                Id = "2",
                 Author = "Khaled Hosseini",
                 Title = "Kite Runner",
                 CreatedDate = DateTime.Now,

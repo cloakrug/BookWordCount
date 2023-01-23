@@ -23,9 +23,11 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSliderModule } from '@angular/material/slider';
 import { DifficultyColorDirective } from './directives/difficultyColor';
 import { AuthModule, LogLevel } from 'angular-auth-oidc-client';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { TokenInterceptor } from './TokenInterceptor';
 import { SigninBannerComponent } from './signin-banner/signin-banner.component';
+import { SnackbarService } from './services/snackbar.service';
 
 @NgModule({
   declarations: [
@@ -64,6 +66,7 @@ import { SigninBannerComponent } from './signin-banner/signin-banner.component';
     MatFormFieldModule,
     MatButtonModule,
     MatSliderModule,
+    MatSnackBarModule,
     MatInputModule,
     MatCheckboxModule,
     RouterModule.forRoot([
@@ -78,6 +81,7 @@ import { SigninBannerComponent } from './signin-banner/signin-banner.component';
   ],
   providers: [
     BookService,
+    SnackbarService,
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
