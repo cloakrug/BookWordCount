@@ -1,11 +1,16 @@
 import { Injectable } from '@angular/core';
-import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent } from '@angular/common/http';
+import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AuthService } from './services/auth.service';
+import { tap } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Injectable()
-export class TokenInterceptor implements HttpInterceptor {
-  constructor(private auth: AuthService) { }
+export class AuthInterceptor implements HttpInterceptor {
+  constructor(
+    private auth: AuthService,
+    private router: Router
+  ) { }
 
   protected protectedRoutePrefixes: string[] = [
     '/Book/',
@@ -17,15 +22,22 @@ export class TokenInterceptor implements HttpInterceptor {
       console.log('route is protected. Adding token');
       const token = this.auth.getBearerToken();
 
-      // TODO: if token is null, redirect to login
-
-      const authReq = req.clone({
+      const request = req.clone({
         setHeaders: {
           Authorization: `Bearer ${token}`
         }
       });
 
-      return next.handle(authReq);
+      return next.handle(request).pipe(tap(() => { },
+        (err: any) => {
+          if (err instanceof HttpErrorResponse) {
+            if (err.status !== 401) {
+              return;
+            }
+            this.router.navigate(['login']);
+          }
+        }));
+
     } else {
       console.log('route is NOT protected');
       return next.handle(req);

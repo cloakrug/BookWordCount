@@ -25,7 +25,7 @@ import { DifficultyColorDirective } from './directives/difficultyColor';
 import { AuthModule, LogLevel } from 'angular-auth-oidc-client';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { LoginPageComponent } from './login-page/login-page.component';
-import { TokenInterceptor } from './TokenInterceptor';
+import { AuthInterceptor } from './AuthInterceptor';
 import { SigninBannerComponent } from './signin-banner/signin-banner.component';
 import { SnackbarService } from './services/snackbar.service';
 
@@ -82,7 +82,7 @@ import { SnackbarService } from './services/snackbar.service';
   providers: [
     BookService,
     SnackbarService,
-    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })

@@ -30,11 +30,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="ClientApp\src\app\AuthInterceptor.ts" />
 	  <None Remove="ClientApp\src\app\models\book.ts" />
 	  <None Remove="ClientApp\src\app\models\bookstatsmodel.ts" />
 	  <None Remove="ClientApp\src\app\models\genre.ts" />
 	  <None Remove="ClientApp\src\app\search-bar\searchresult.ts" />
-	  <None Remove="ClientApp\src\app\TokenInterceptor.ts" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -42,7 +42,7 @@
 	  <TypeScriptCompile Include="ClientApp\src\app\models\bookstatsmodel.ts" />
 	  <TypeScriptCompile Include="ClientApp\src\app\models\genre.ts" />
 	  <TypeScriptCompile Include="ClientApp\src\app\models\searchresult.ts" />
-	  <TypeScriptCompile Include="ClientApp\src\app\TokenInterceptor.ts" />
+	  <TypeScriptCompile Include="ClientApp\src\app\AuthInterceptor.ts" />
 	</ItemGroup>
 
 	<Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

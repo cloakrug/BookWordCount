@@ -29,7 +29,7 @@ export class LoginPageComponent implements OnInit {
     });
 
     this.authService.credentialResponse$.subscribe((res: boolean) => {
-      this.zone.run(() => {
+      //this.zone.run(() => {
         if (res) {
           // get return url from query parameters or default to home page
           const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
@@ -37,7 +37,7 @@ export class LoginPageComponent implements OnInit {
         } else {
           this.snackbarService.openSnackBar('Login failed', 'OK');
         }
-      });
+      //});
     });
   }
 
