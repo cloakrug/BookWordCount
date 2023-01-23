@@ -38,15 +38,7 @@ export class AppComponent implements OnInit {
   }
 
   handleCredentialResponse(response: CredentialResponse) {
-    // Decoding  JWT token...
-    let decodedToken: any | null = null;
-    try {
-      this.authService.setBearerToken(response.credential);
-      decodedToken = JSON.parse(atob(response?.credential.split('.')[1]));
-    } catch (e) {
-      console.error('Error while trying to decode token', e);
-    }
-    console.log('decodedToken', decodedToken);
+    this.authService.handleCredentialResponse(response);
   }
 
 }

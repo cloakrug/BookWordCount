@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, NgZone, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
+import { SnackbarService } from '../services/snackbar.service';
 
 @Component({
   selector: 'app-login-page',
@@ -8,7 +10,13 @@ import { AuthService } from '../services/auth.service';
 })
 export class LoginPageComponent implements OnInit {
 
-  constructor(private authService: AuthService) { }
+  constructor(
+    private authService: AuthService,
+    private route: ActivatedRoute,
+    private snackbarService: SnackbarService,
+    private router: Router,
+    private zone: NgZone
+  ) { }
 
   ngOnInit(): void {
     this.authService.googleLibraryLoaded$().subscribe((res: boolean) => {
@@ -18,6 +26,18 @@ export class LoginPageComponent implements OnInit {
       } else {
         console.log('googleLibraryLoaded$ returned false');
       }
+    });
+
+    this.authService.credentialResponse$.subscribe((res: boolean) => {
+      this.zone.run(() => {
+        if (res) {
+          // get return url from query parameters or default to home page
+          const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+          this.router.navigateByUrl(returnUrl);
+        } else {
+          this.snackbarService.openSnackBar('Login failed', 'OK');
+        }
+      });
     });
   }
 

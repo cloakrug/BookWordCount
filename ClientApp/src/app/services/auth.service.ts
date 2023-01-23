@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import { AuthenticatedResult, OidcSecurityService } from 'angular-auth-oidc-client';
+import { EventEmitter, Injectable } from '@angular/core';
+import { CredentialResponse } from 'google-one-tap';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -8,9 +8,10 @@ import { map } from 'rxjs/operators';
 })
 export class AuthService {
   public googleLibraryLoadedDataSource: BehaviorSubject<boolean> = new BehaviorSubject(false);
+  public credentialResponse$: EventEmitter<boolean> = new EventEmitter<boolean>();
   public tokenDataSource: BehaviorSubject<string> = new BehaviorSubject("");
 
-  constructor(private oidcService: OidcSecurityService) {
+  constructor() {
     this.googleLibraryLoaded$().subscribe((loaded: boolean) => {
       if (loaded) {
         this.tokenDataSource.next(this.getBearerToken());
@@ -18,8 +19,26 @@ export class AuthService {
     });
   }
 
+  handleCredentialResponse(response: CredentialResponse) {
+    // Decoding  JWT token...
+    let decodedToken: any | null = null;
+    try {
+      this.setBearerToken(response.credential);
+      decodedToken = JSON.parse(atob(response?.credential.split('.')[1]));
+    } catch (e) {
+      console.error('Error while trying to decode token', e);
+    }
+    console.log('decodedToken', decodedToken);
+
+    this.credentialResponse$.emit(this.isTokenNull(decodedToken));
+  }
+
   public isLoggedIn(): Observable<boolean> {
-    return this.tokenDataSource.pipe(map(token => token !== null && token !== undefined && token !== "" ));
+    return this.tokenDataSource.pipe(map(this.isTokenNull));
+  }
+
+  public isTokenNull(token: string): boolean {
+    return token !== null && token !== undefined && token !== "" 
   }
 
   public googleLibraryLoaded(): boolean {

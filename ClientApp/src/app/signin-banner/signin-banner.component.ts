@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterStateSnapshot } from '@angular/router';
 
 @Component({
   selector: 'signin-banner',
@@ -7,15 +7,19 @@ import { Router } from '@angular/router';
   styleUrls: ['./signin-banner.component.css']
 })
 export class SigninBannerComponent implements OnInit {
+  private routerSnapshot: RouterStateSnapshot;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router) {
+    this.routerSnapshot = router.routerState.snapshot;
+  }
 
   ngOnInit(): void {
     console.log(' in SigninBannerComponent')
   }
 
   onLoginClick(): void {
-    console.log(' in onLoginLcik')
-    this.router.navigateByUrl('/login');
+    console.log(' in onLoginClick')
+    this.router.navigate(['/login'], { queryParams: { returnUrl: this.routerSnapshot.url } });
   }
 }
+
