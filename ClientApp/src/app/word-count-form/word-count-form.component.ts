@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { AbstractControl, FormArray, FormControl, FormGroup, UntypedFormControl, UntypedFormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { BookStatsModel } from '../models/bookstatsmodel';
 import { BookService } from '../services/book.service';
+import { SnackbarService } from '../services/snackbar.service';
 
 @Component({
   selector: 'word-count-form',
@@ -29,7 +30,10 @@ export class WordCountFormComponent implements OnInit {
     difficulty: new FormControl(0, [Validators.pattern("^[0-9]*$"), Validators.min(0)]),
   });
   
-  constructor(private bookService: BookService) { }
+  constructor(
+    private bookService: BookService,
+    private snackbarService: SnackbarService
+  ) { }
   
   ngOnInit(): void {
     console.log('in WordCountFormComponent constructor');
@@ -101,7 +105,15 @@ export class WordCountFormComponent implements OnInit {
         model.difficulty = this.form.get('difficulty')?.value;
       }
 
-      this.bookService.addStats(model).subscribe(res => console.log(res));
+      this.bookService.addStats(model).subscribe(res => {
+        if (res) {
+          this.snackbarService.openSnackBar("Stats were successfully saved.", "Close")
+        } else {
+          this.snackbarService.openSnackBar("Error saving stats. Please retry again later", "Close")
+        }
+      }, () => {
+        this.snackbarService.openSnackBar("Error saving stats. Please retry again later", "Close")
+      });
     }
   }
 
