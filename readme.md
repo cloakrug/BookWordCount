@@ -1,4 +1,4 @@
-# Book Word Count
+# Readshed
 
 ## Getting Started
 1. `git clone` the repository and open in Visual Studio
