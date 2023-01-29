@@ -21,6 +21,7 @@ import { WordCountFormComponent } from './word-count-form/word-count-form.compon
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSliderModule } from '@angular/material/slider';
+import { MatTableModule } from '@angular/material/table';
 import { DifficultyColorDirective } from './directives/difficultyColor';
 import { AuthModule, LogLevel } from 'angular-auth-oidc-client';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
@@ -28,6 +29,7 @@ import { LoginPageComponent } from './login-page/login-page.component';
 import { AuthInterceptor } from './AuthInterceptor';
 import { SigninBannerComponent } from './signin-banner/signin-banner.component';
 import { SnackbarService } from './services/snackbar.service';
+import { UserPageComponent } from './user-page/user-page.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +45,8 @@ import { SnackbarService } from './services/snackbar.service';
     WordCountFormComponent,
     DifficultyColorDirective,
     LoginPageComponent,
-    SigninBannerComponent
+    SigninBannerComponent,
+    UserPageComponent
   ],
   imports: [
     AuthModule.forRoot({
@@ -68,12 +71,14 @@ import { SnackbarService } from './services/snackbar.service';
     MatSliderModule,
     MatSnackBarModule,
     MatInputModule,
+    MatTableModule,
     MatCheckboxModule,
     RouterModule.forRoot([
       { path: "browse", component: BrowsePageComponent },
       { path: "about", component: AboutPageComponent },
       { path: "book/:id", component: BookPageComponent },
       { path: "login", component: LoginPageComponent },
+      { path: "user", component: UserPageComponent },
       { path: "", component: HomePageComponent, pathMatch: 'full' },  // pathMatch: 'full' as PathMatch  https://stackoverflow.com/questions/73964138/angular-14-pathmatch-type-string-is-not-assignable-to-type-full-prefix
       { path: '**', component: NotFoundComponent }
     ]),

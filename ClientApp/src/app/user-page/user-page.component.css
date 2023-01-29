@@ -1,0 +1,7 @@
+.header-cell {
+    width: 150px;
+}
+
+.center-column th, .center-column td {
+  text-align: center;
+}

@@ -1,4 +1,4 @@
-export interface BookStatsModel {
+export interface AddBookStatsModel {
   UserId?: string,
   BookId: string,
   wordCount?: number,

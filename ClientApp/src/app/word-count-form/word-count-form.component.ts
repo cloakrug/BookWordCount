@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { AbstractControl, FormArray, FormControl, FormGroup, UntypedFormControl, UntypedFormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
-import { BookStatsModel } from '../models/bookstatsmodel';
+import { AddBookStatsModel } from '../models/bookstatsmodel';
 import { BookService } from '../services/book.service';
 import { SnackbarService } from '../services/snackbar.service';
 
@@ -85,7 +85,7 @@ export class WordCountFormComponent implements OnInit {
     // Ensure that the form is valid
     if (this.form.valid) {
 
-      const model: BookStatsModel = {
+      const model: AddBookStatsModel = {
         BookId: this.bookId
       };
 

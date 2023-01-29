@@ -34,6 +34,7 @@
 	  <None Remove="ClientApp\src\app\models\book.ts" />
 	  <None Remove="ClientApp\src\app\models\bookstatsmodel.ts" />
 	  <None Remove="ClientApp\src\app\models\genre.ts" />
+	  <None Remove="ClientApp\src\app\models\userbookstats.ts" />
 	  <None Remove="ClientApp\src\app\search-bar\searchresult.ts" />
 	</ItemGroup>
 
@@ -43,6 +44,7 @@
 	  <TypeScriptCompile Include="ClientApp\src\app\models\genre.ts" />
 	  <TypeScriptCompile Include="ClientApp\src\app\models\searchresult.ts" />
 	  <TypeScriptCompile Include="ClientApp\src\app\AuthInterceptor.ts" />
+	  <TypeScriptCompile Include="ClientApp\src\app\models\userbookstats.ts" />
 	</ItemGroup>
 
 	<Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
