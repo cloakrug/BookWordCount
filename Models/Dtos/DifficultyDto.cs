@@ -3,7 +3,8 @@
     public class DifficultyDto
     {
         public string UserId { get; set; }
-        public int Time { get; set; }
+        public string BookId { get; set; }
+        public int DifficultyOfBook { get; set; }
         public DateTime Created { get; set; }
         public DateTime LastModified { get; set; }
     }

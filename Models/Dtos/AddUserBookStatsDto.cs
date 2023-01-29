@@ -2,9 +2,10 @@
 
 namespace BookWordCount.Models.Dtos
 {
-    public class UserBookStatsDto
+    public class AddUserBookStatsDto
     {
-        public BookDto book { get; set; }
+        public string? UserId { get; set; }
+        public string BookId { get; set; }
         public int? wordCount { get; set; }
         public int? pageCount { get; set; }
         public int? difficulty { get; set; }

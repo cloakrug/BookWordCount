@@ -4,8 +4,8 @@ namespace BookWordCount.Interfaces
 {
     public interface IUserBookStatService
     {
-        UserBookStatsDto AddUserBookStats(UserBookStatsDto userBookStats);
-        AllUserBookStatsDto GetAllUserBookStats(string userId);
-        UserBookStatsDto GetUserBookStats(string userId, string bookId);
+        AddUserBookStatsDto AddUserBookStats(AddUserBookStatsDto userBookStats);
+        IEnumerable<UserBookStatsDto> GetAllUserBookStats(string userId);
+        AddUserBookStatsDto GetUserBookStats(string userId, string bookId);
     }
 }

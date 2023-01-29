@@ -17,23 +17,26 @@ namespace BookWordCount.AutoMapper
             CreateMap<MajorGenreDto, MajorGenre>().ReverseMap();
 
             CreateMap<WordCountDto, WordCount>().ReverseMap();
+            CreateMap<PageCountDto, PageCount>().ReverseMap();
+            CreateMap<DurationDto, Duration>().ReverseMap();
+            CreateMap<DifficultyDto, Difficulty>().ReverseMap();
 
-            CreateMap<UserBookStatsDto, WordCount>()
+            CreateMap<AddUserBookStatsDto, WordCount>()
                 .ForMember(d => d.Count,
                     opt => opt.MapFrom(src => src.wordCount)
                 ).ReverseMap();
 
-            CreateMap<UserBookStatsDto, PageCount>()
+            CreateMap<AddUserBookStatsDto, PageCount>()
                 .ForMember(d => d.Count,
                     opt => opt.MapFrom(src => src.pageCount)
                 ).ReverseMap();
 
-            CreateMap<UserBookStatsDto, Difficulty>()
+            CreateMap<AddUserBookStatsDto, Difficulty>()
                 .ForMember(d => d.DifficultyOfBook,
                     opt => opt.MapFrom(src => src.difficulty)
                 ).ReverseMap();
 
-            CreateMap<UserBookStatsDto, Duration>()
+            CreateMap<AddUserBookStatsDto, Duration>()
                 .ForMember(d => d.TimeInSeconds,
                     opt => opt.MapFrom(src => src.durationInSeconds)
                 ).ReverseMap();

@@ -18,6 +18,7 @@ namespace BookWordCount.Controllers
             _userBookStatService = userBookStatService;
         }
 
+        [Authorize]
         [HttpGet]
         public IActionResult GetAllBookStatsForCurrentUser()
         {
@@ -54,7 +55,7 @@ namespace BookWordCount.Controllers
 
         [Authorize]
         [HttpPost]
-        public IActionResult Add(UserBookStatsDto stats)
+        public IActionResult Add(AddUserBookStatsDto stats)
         {
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 

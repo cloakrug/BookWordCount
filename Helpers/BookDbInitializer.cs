@@ -25,6 +25,12 @@ namespace BookWordCount.Helpers
 
             _context.AddRange(getDefaultWordCounts());
             _context.SaveChanges();
+
+            _context.AddRange(getDefaultDurations());
+            _context.SaveChanges();
+
+            _context.AddRange(getDefaultDifficultys());
+            _context.SaveChanges();
         }
 
         private IList<Genre> getDefaultGenres()
@@ -107,6 +113,47 @@ namespace BookWordCount.Helpers
             });
 
             return defaultWordCounts;
+        }
+
+        private IList<Duration> getDefaultDurations()
+        {
+            List<Duration> defaultDurations = new List<Duration>();
+
+            defaultDurations.Add(new Duration()
+            {
+                Book = _context.Books.ToList()[0],
+                UserId = "1",
+                TimeInSeconds = 5401,
+                Created = DateTime.Now,
+                LastModified = DateTime.Now,
+            });
+
+            defaultDurations.Add(new Duration()
+            {
+                Book = _context.Books.ToList()[1],
+                UserId = "1",
+                TimeInSeconds = 65,
+                Created = DateTime.Now,
+                LastModified = DateTime.Now
+            });
+
+            return defaultDurations;
+        }
+
+        private IList<Difficulty> getDefaultDifficultys()
+        {
+            List<Difficulty> defaultDifficultys = new List<Difficulty>();
+
+            defaultDifficultys.Add(new Difficulty()
+            {
+                Book = _context.Books.ToList()[1],
+                UserId = "1",
+                DifficultyOfBook = 7,
+                Created = DateTime.Now,
+                LastModified = DateTime.Now
+            });
+
+            return defaultDifficultys;
         }
     }
 }

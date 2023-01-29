@@ -21,7 +21,7 @@ namespace BookWordCount.Services
             _mapper = mapper;
         }
 
-        public AllUserBookStatsDto GetAllUserBookStats(string userId)
+        public IEnumerable<UserBookStatsDto> GetAllUserBookStats(string userId)
         {
             var wordCounts = _ctx.WordCounts
                 .Where(count => count.UserId == userId);
@@ -48,19 +48,28 @@ namespace BookWordCount.Services
             var difficultyDtos = _mapper.Map<IEnumerable<DifficultyDto>>(difficultys);
             var bookDtos = _mapper.Map<IEnumerable<BookDto>>(books);
 
-            var userBookStats = new AllUserBookStatsDto()
-            {
-                WordCounts = wordCountDtos.ToList(),
-                PageCount = pageCountDtos.ToList(),
-                Duration = durationDtos.ToList(),
-                Difficulty = difficultyDtos.ToList(),
-                Books = bookDtos.ToList()
-            };
+            var res = from book in bookDtos
+                      join wc in wordCountDtos on book.Id equals wc.BookId into wcg
+                      from subWc in wcg.DefaultIfEmpty()
+                      join pc in pageCountDtos on book.Id equals pc.BookId into pcg
+                      from subPc in pcg.DefaultIfEmpty()
+                      join dur in durationDtos on book.Id equals dur.BookId into durg
+                      from subDur in durg.DefaultIfEmpty()
+                      join diff in difficultyDtos on book.Id equals diff.BookId into difg
+                      from subDif in difg.DefaultIfEmpty()
+                      select new UserBookStatsDto()
+                      {
+                          book = book,
+                          wordCount = subWc?.Count,
+                          pageCount = subPc?.Count,
+                          durationInSeconds = subDur?.TimeInSeconds,
+                          difficulty = subDif?.DifficultyOfBook
+                      };
 
-            return userBookStats;
+            return res;
         }
 
-        public UserBookStatsDto AddUserBookStats(UserBookStatsDto userBookStats)
+        public AddUserBookStatsDto AddUserBookStats(AddUserBookStatsDto userBookStats)
         {
             WordCount wordCounts;
             PageCount pageCounts;
@@ -94,11 +103,9 @@ namespace BookWordCount.Services
             _ctx.SaveChanges();   
 
             return userBookStats;
-
-            //problem is that submit is automatically called when you click a button inside. Need to figure out how to remove this functionality. 
         }
 
-        public UserBookStatsDto GetUserBookStats(string userId, string bookId)
+        public AddUserBookStatsDto GetUserBookStats(string userId, string bookId)
         {
             var wordCount = _ctx.WordCounts
                 .Where(count => count.UserId == userId && count.Book.Id == bookId)
@@ -116,7 +123,7 @@ namespace BookWordCount.Services
                 .Where(difficulty => difficulty.UserId == userId && difficulty.Book.Id == bookId)
                 .Take(1);
 
-            var userBookStats = new UserBookStatsDto()
+            var userBookStats = new AddUserBookStatsDto()
             {
                 wordCount = wordCount.FirstOrDefault()?.Count,
                 pageCount = pageCount.FirstOrDefault()?.Count,
