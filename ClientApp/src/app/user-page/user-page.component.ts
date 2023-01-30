@@ -10,7 +10,7 @@ interface UserBookStatsTableModel {
   wordCount: string;
   pageCount: string;
   difficulty: string;
-  durationInSeconds: string;
+  duration: string;
 }
 
 @Component({
@@ -42,9 +42,24 @@ export class UserPageComponent implements OnInit {
         wordCount: model.wordCount?.toString() ?? "-",
         pageCount: model.pageCount?.toString() ?? "-",
         difficulty: model.difficulty?.toString() ?? "-",
-        durationInSeconds: model.durationInSeconds?.toString() ?? "-"
+        duration: model.durationInSeconds === null
+          ? "-"
+          : this.convertSecondsToTimeStr(model.durationInSeconds)
       } as UserBookStatsTableModel;
     });
+  }
+  
+  private convertSecondsToTimeStr(seconds: number): string {
+    let hours = Math.floor(seconds / 3600);
+    let minutes = Math.floor((seconds - (hours * 3600)) / 60);
+
+    let hoursStr = hours.toString();
+    let minutesStr = minutes.toString();
+
+    if (minutes < 10) {
+      minutesStr = "0" + minutes;
+    }
+    return hoursStr + ':' + minutesStr;
   }
 
   // TODO
