@@ -20,6 +20,7 @@ import { BookService } from './services/book.service';
 import { WordCountFormComponent } from './word-count-form/word-count-form.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatTableModule } from '@angular/material/table';
 import { DifficultyColorDirective } from './directives/difficultyColor';
@@ -67,6 +68,7 @@ import { UserPageComponent } from './user-page/user-page.component';
     FormsModule,
     ReactiveFormsModule,
     MatFormFieldModule,
+    MatIconModule,
     MatButtonModule,
     MatSliderModule,
     MatSnackBarModule,

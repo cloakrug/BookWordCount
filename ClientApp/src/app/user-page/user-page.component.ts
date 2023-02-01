@@ -20,7 +20,7 @@ interface UserBookStatsTableModel {
 })
 export class UserPageComponent implements OnInit {
 
-  public displayedColumns: string[] = ['book', 'wordCount', 'pageCount', 'duration', 'difficulty'];
+  public displayedColumns: string[] = ['book', 'wordCount', 'pageCount', 'duration', 'difficulty', 'actions'];
 
   public userBookStats$: BehaviorSubject<UserBookStatsTableModel[]> = new BehaviorSubject([] as UserBookStatsTableModel[]);
   public showGetStatsError: boolean = false;
@@ -38,6 +38,7 @@ export class UserPageComponent implements OnInit {
   convertResToViewModel(res: UserBookStatsModel[]): UserBookStatsTableModel[] {
     return res.map((model: UserBookStatsModel) => {
       return {
+        bookId: model.book?.id,
         bookTitle: model.book?.title,
         wordCount: model.wordCount?.toString() ?? "-",
         pageCount: model.pageCount?.toString() ?? "-",
@@ -47,6 +48,15 @@ export class UserPageComponent implements OnInit {
           : this.convertSecondsToTimeStr(model.durationInSeconds)
       } as UserBookStatsTableModel;
     });
+  }
+
+  //// TODO
+  //onEdit(bookId: string) {
+  //  console.log('in onEdit - id: ' + bookId)
+  //}
+
+  onDelete(bookId: string) {
+    
   }
   
   private convertSecondsToTimeStr(seconds: number): string {

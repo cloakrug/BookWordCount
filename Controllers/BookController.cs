@@ -52,6 +52,7 @@ namespace BookWordCount.Controllers
                         {
                             Id = book.Id,
                             Title = book.Title,
+                            Author = book.Author,
                             ImageUrl = book.ImageUrl,
                             ReleaseDate = book.ReleaseDate,
                             ShortDescription = new string(book.Description.Take(200).ToArray())

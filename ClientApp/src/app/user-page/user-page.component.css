@@ -5,3 +5,17 @@
 .center-column th, .center-column td {
   text-align: center;
 }
+
+.mat-column-actions button {
+  display: none;
+  background-color: transparent;
+}
+
+.mat-column-actions:hover button {
+  display: inline-block;
+}
+
+.actions-cell mat-icon{
+    margin-right: 1rem;
+    cursor: pointer;
+}

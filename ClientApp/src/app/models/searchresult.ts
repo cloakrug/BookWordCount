@@ -3,7 +3,7 @@ export type SearchResult = BookResult;
 export interface BookResult {
   title: string,
   author: string,
-  releaseYear: string,
+  releaseDate: string,
   id: string,
   genres: GenreResult[],
   shortDescription: string,

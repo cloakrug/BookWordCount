@@ -43,7 +43,7 @@ namespace BookWordCount.Services
             )
         {
             var res = GetBooks()
-                .Where(book => book.Title.Contains(searchTerm));
+                .Where(book => book.Title.ToLower().Contains(searchTerm.ToLower()));
 
             if (filter != null)
             {
