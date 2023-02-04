@@ -12,9 +12,7 @@ import { NavComponent } from './nav/nav.component';
 import { BookPageComponent } from './book-page/book-page.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { SearchBarComponent } from './search-bar/search-bar.component';
-import { AboutPageComponent } from './about-page/about-page.component';
 import { BrowsePageComponent } from './browse-page/browse-page.component';
-import { HomePageComponent } from './home-page/home-page.component';
 import { NameComponentComponent } from './name-component/name-component.component';
 import { BookService } from './services/book.service';
 import { WordCountFormComponent } from './word-count-form/word-count-form.component';
@@ -39,9 +37,7 @@ import { UserPageComponent } from './user-page/user-page.component';
     BookPageComponent,
     NotFoundComponent,
     SearchBarComponent,
-    AboutPageComponent,
     BrowsePageComponent,
-    HomePageComponent,
     NameComponentComponent,
     WordCountFormComponent,
     DifficultyColorDirective,
@@ -77,11 +73,10 @@ import { UserPageComponent } from './user-page/user-page.component';
     MatCheckboxModule,
     RouterModule.forRoot([
       { path: "browse", component: BrowsePageComponent },
-      { path: "about", component: AboutPageComponent },
       { path: "book/:id", component: BookPageComponent },
       { path: "login", component: LoginPageComponent },
       { path: "user", component: UserPageComponent },
-      { path: "", component: HomePageComponent, pathMatch: 'full' },  // pathMatch: 'full' as PathMatch  https://stackoverflow.com/questions/73964138/angular-14-pathmatch-type-string-is-not-assignable-to-type-full-prefix
+      { path: "", component: BrowsePageComponent, pathMatch: 'full' },  // pathMatch: 'full' as PathMatch  https://stackoverflow.com/questions/73964138/angular-14-pathmatch-type-string-is-not-assignable-to-type-full-prefix
       { path: '**', component: NotFoundComponent }
     ]),
     BrowserAnimationsModule
