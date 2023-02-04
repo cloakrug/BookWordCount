@@ -9,6 +9,22 @@ code {
   color: #e01a76;
 }
 
+.page-row {
+  max-width: 800px;
+  margin: auto;
+}
+
+#title {
+  display: inline-block;
+}
+
+.title-row {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
 .btn-primary {
   color: #fff;
   background-color: #1b6ec2;
