@@ -93,17 +93,25 @@ namespace BookWordCount.Controllers
         //    }
         //}
 
-        //[HttpDelete]
-        //public IActionResult Delete(int wordCountId)
-        //{
-        //    if (_wordCountService.DeleteWordCount(wordCountId))
-        //    {
-        //        return Ok();
-        //    }
-        //    else
-        //    {
-        //        return StatusCode(500);
-        //    }
-        //}
+        [Authorize]
+        [HttpDelete]
+        public IActionResult DeleteStatsForBook(string bookId)
+        {
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            if (userId == null)
+            {
+                return Unauthorized();
+            }
+
+            if (_userBookStatService.DeleteStatsForBook(bookId, userId))
+            {
+                return Ok(true);
+            } else
+            {
+                return StatusCode(500);
+            }
+
+        }
     }
 }

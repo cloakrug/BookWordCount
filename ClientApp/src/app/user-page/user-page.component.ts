@@ -4,8 +4,10 @@ import { first } from 'rxjs/operators';
 import { Book } from '../models/book';
 import { UserBookStatsModel } from '../models/userbookstats';
 import { BookService } from '../services/book.service';
+import { SnackbarService } from '../services/snackbar.service';
 
 interface UserBookStatsTableModel {
+  bookId: string;
   bookTitle: string;
   wordCount: string;
   pageCount: string;
@@ -25,12 +27,11 @@ export class UserPageComponent implements OnInit {
   public userBookStats$: BehaviorSubject<UserBookStatsTableModel[]> = new BehaviorSubject([] as UserBookStatsTableModel[]);
   public showGetStatsError: boolean = false;
 
-  constructor(private bookService: BookService) { }
+  constructor(private bookService: BookService, private snackbarService: SnackbarService) { }
 
   ngOnInit(): void {
     this.bookService.getAllUserStats().pipe(first()).subscribe((res: UserBookStatsModel[]) => {
       const vm = this.convertResToViewModel(res);
-      console.log('vm: ', vm);
       this.userBookStats$.next(vm);
     }, this.handleGetStatsError);
   }
@@ -56,7 +57,17 @@ export class UserPageComponent implements OnInit {
   //}
 
   onDelete(bookId: string) {
-    
+    if (confirm("Are you sure to delete?")) {
+      this.bookService.deleteStats(bookId).subscribe(res => {
+        if (res) {
+          var tableModel = this.userBookStats$.value.filter(row => row.bookId !== bookId);
+          this.userBookStats$.next(tableModel);
+          this.snackbarService.openSnackBar("Deleted successfully", "OK");
+        } else {
+          this.snackbarService.openSnackBar("Error deleting", "OK");
+        }
+      }, error => this.snackbarService.openSnackBar("Error deleting", "OK"))
+    }
   }
   
   private convertSecondsToTimeStr(seconds: number): string {

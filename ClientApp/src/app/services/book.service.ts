@@ -10,8 +10,9 @@ import { UserBookStatsModel } from '../models/userbookstats';
   providedIn: 'root'
 })
 export class BookService {
-
+  
   private readonly apiUrl: string = 'https://localhost:7041';
+  private readonly userStatsUrl: string = `${this.apiUrl}/UserBookStat`;
 
   constructor(private http: HttpClient) { }
 
@@ -28,11 +29,15 @@ export class BookService {
   }
 
   public addStats(model: AddBookStatsModel): Observable<AddBookStatsModel> {
-    return this.http.post<AddBookStatsModel>(`${this.apiUrl}/UserBookStat/Add`, model);
+    return this.http.post<AddBookStatsModel>(`${this.userStatsUrl}/Add`, model);
   }
 
   public getAllUserStats(): Observable<UserBookStatsModel[]> {
-    return this.http.get<UserBookStatsModel[]>(`${this.apiUrl}/UserBookStat/GetAllBookStatsForCurrentUser`);
+    return this.http.get<UserBookStatsModel[]>(`${this.userStatsUrl}/GetAllBookStatsForCurrentUser`);
+  }
+
+  public deleteStats(bookId: string): Observable<UserBookStatsModel> {
+    return this.http.delete<UserBookStatsModel>(`${this.userStatsUrl}/DeleteStatsForBook?bookId=${bookId}`);
   }
 
 }

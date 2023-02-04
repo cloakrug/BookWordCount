@@ -180,16 +180,48 @@ namespace BookWordCount.Services
         //    return true;
         //}
 
-        //public bool DeleteWordCount(int wordCountId)
-        //{
-        //    var entity = _ctx.WordCounts.Find(wordCountId);
+        public bool DeleteStatsForBook(string bookId, string userId)
+        {
+            var wc = _ctx.WordCounts
+                .Where(count => count.Book.Id == bookId )
+                .Where(count => count.UserId == userId).FirstOrDefault();
 
-        //    if (entity == null) return false;
+            var pc = _ctx.PageCounts
+                .Where(count => count.Book.Id == bookId)
+                .Where(count => count.UserId == userId).FirstOrDefault();
 
-        //    _ctx.WordCounts.Remove(entity);
-        //    _ctx.SaveChanges();
-        //    return true;
-        //}
+            var dur = _ctx.Durations
+                .Where(duration => duration.Book.Id == bookId)
+                .Where(duration => duration.UserId == userId).FirstOrDefault();
+            
+            var dif = _ctx.DifficultyStats
+                .Where(difficulty => difficulty.Book.Id == bookId)
+                .Where(difficulty => difficulty.UserId == userId).FirstOrDefault();
+
+            if (wc != null)
+            {
+                _ctx.WordCounts.Remove(wc);
+            }
+
+            if (pc != null)
+            {
+                _ctx.PageCounts.Remove(pc);
+            }
+
+            if (dur != null)
+            {
+                _ctx.Durations.Remove(dur);
+            }
+
+            if (dif != null)
+            {
+                _ctx.DifficultyStats.Remove(dif);
+            }
+
+            _ctx.SaveChanges();
+
+            return true;
+        }
 
     }
 }
