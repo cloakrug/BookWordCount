@@ -1,38 +1,40 @@
+<div class="page-row">
+  <table mat-table [dataSource]="userBookStats$" class="mat-elevation-z8">
+    <ng-container matColumnDef="book">
+      <th mat-header-cell *matHeaderCellDef class="header-cell">Book</th>
+      <td mat-cell *matCellDef="let book">{{ book.bookTitle }}</td>
+    </ng-container>
 
-<table mat-table [dataSource]="userBookStats$" class="mat-elevation-z8">
-  <ng-container matColumnDef="book">
-    <th mat-header-cell *matHeaderCellDef class="header-cell">Book</th>
-    <td mat-cell *matCellDef="let book">{{ book.bookTitle }}</td>
-  </ng-container>
+    <ng-container matColumnDef="wordCount">
+      <th mat-header-cell *matHeaderCellDef class="header-cell">Word Count</th>
+      <td mat-cell *matCellDef="let book">{{ book.wordCount }}</td>
+    </ng-container>
 
-  <ng-container matColumnDef="wordCount">
-    <th mat-header-cell *matHeaderCellDef class="header-cell">Word Count</th>
-    <td mat-cell *matCellDef="let book">{{ book.wordCount }}</td>
-  </ng-container>
+    <ng-container matColumnDef="pageCount">
+      <th mat-header-cell *matHeaderCellDef class="header-cell">Page Count</th>
+      <td mat-cell *matCellDef="let book">{{ book.pageCount }}</td>
+    </ng-container>
 
-  <ng-container matColumnDef="pageCount">
-    <th mat-header-cell *matHeaderCellDef class="header-cell">Page Count</th>
-    <td mat-cell *matCellDef="let book">{{ book.pageCount }}</td>
-  </ng-container>
+    <ng-container matColumnDef="duration">
+      <th mat-header-cell *matHeaderCellDef class="header-cell">Time to Read</th>
+      <td mat-cell *matCellDef="let book">{{ book.duration }}</td>
+    </ng-container>
 
-  <ng-container matColumnDef="duration">
-    <th mat-header-cell *matHeaderCellDef class="header-cell">Time to Read</th>
-    <td mat-cell *matCellDef="let book">{{ book.duration }}</td>
-  </ng-container>
+    <ng-container matColumnDef="difficulty">
+      <th mat-header-cell *matHeaderCellDef class="header-cell">Difficulty</th>
+      <td mat-cell *matCellDef="let book">{{ book.difficulty }}</td>
+    </ng-container>
 
-  <ng-container matColumnDef="difficulty">
-    <th mat-header-cell *matHeaderCellDef class="header-cell">Difficulty</th>
-    <td mat-cell *matCellDef="let book">{{ book.difficulty }}</td>
-  </ng-container>
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let book" class="actions-cell">
+        <!--<mat-icon (click)="onEdit(book.bookId)">edit</mat-icon>--> <!--TODO-->
+        <mat-icon (click)="onDelete(book.bookId)">delete(book.id)</mat-icon>
+      </td>
+    </ng-container>
 
-  <ng-container matColumnDef="actions">
-    <th mat-header-cell *matHeaderCellDef></th>
-    <td mat-cell *matCellDef="let book" class="actions-cell">
-      <!--<mat-icon (click)="onEdit(book.bookId)">edit</mat-icon>--> <!--TODO-->
-      <mat-icon (click)="onDelete(book.bookId)">delete(book.id)</mat-icon>
-    </td>
-</ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>
 
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table>

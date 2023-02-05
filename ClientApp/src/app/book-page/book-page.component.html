@@ -1,21 +1,21 @@
-<div>
-
+<div class="page-row">
   <app-search-bar></app-search-bar>
-
-  <ng-container *ngIf="book">
-    <div class="bookInfo">
-      <h1 [innerText]="book.title"></h1>
-      <h3 [innerText]="book.author"></h3>
-      <p [innerText]="book.description"></p>
-      <p *ngFor="let genre of book.genres" [innerText]="genre.text" class="genre"></p>
-    </div>
-
-    <word-count-form *ngIf="book" [bookId]="book.id"></word-count-form>
-    <signin-banner *ngIf="displayLoginBanner"></signin-banner>
-
-  </ng-container>
-
-  <ng-container *ngIf="errorGettingBook">
-    <p>Error getting book</p>
-  </ng-container>
 </div>
+
+<ng-container *ngIf="book">
+  <div class="bookInfo page-row">
+    <h1 [innerText]="book.title"></h1>
+    <h3 [innerText]="book.author"></h3>
+    <p [innerText]="book.description"></p>
+    <p *ngFor="let genre of book.genres" [innerText]="genre.text" class="genre"></p>
+  </div>
+
+  <div class="page-row">
+    <word-count-form *ngIf="book" [bookId]="book.id"></word-count-form>
+    <signin-banner *ngIf="displayLoginBanner" class="page-row"></signin-banner>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="errorGettingBook" >
+  <p class="page-row">Error getting book</p>
+</ng-container>
