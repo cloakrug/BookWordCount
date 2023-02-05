@@ -10,7 +10,7 @@
     <p *ngFor="let genre of book.genres" [innerText]="genre.text" class="genre"></p>
   </div>
 
-  <div class="page-row">
+  <div class="page-row form-section">
     <word-count-form *ngIf="book" [bookId]="book.id"></word-count-form>
     <signin-banner *ngIf="displayLoginBanner" class="page-row"></signin-banner>
   </div>

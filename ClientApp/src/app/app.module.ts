@@ -29,6 +29,7 @@ import { AuthInterceptor } from './AuthInterceptor';
 import { SigninBannerComponent } from './signin-banner/signin-banner.component';
 import { SnackbarService } from './services/snackbar.service';
 import { UserPageComponent } from './user-page/user-page.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { UserPageComponent } from './user-page/user-page.component';
     DifficultyColorDirective,
     LoginPageComponent,
     SigninBannerComponent,
-    UserPageComponent
+    UserPageComponent,
+    FooterComponent
   ],
   imports: [
     AuthModule.forRoot({

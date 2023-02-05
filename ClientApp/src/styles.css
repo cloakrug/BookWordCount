@@ -1,5 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
 
+body {
+  min-height: 100vh;
+  display: flex;  /* So that footer can be sticky to the bottom */
+  flex-direction: column;
+}
+
 /* Provide sufficient contrast against white background */
 a {
   color: #0366d6;
