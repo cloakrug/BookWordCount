@@ -3,6 +3,10 @@ p {
   margin: 0;
 }
 
+input:focus {
+  outline: none;
+}
+
 .search-bar {
   margin: 0 0 1rem 0;
   padding: 0;
@@ -22,7 +26,7 @@ p {
   box-sizing: border-box;
   background-color: transparent;
   border-radius: .3rem;
-  background-color: hsl(29, 0%, 20%);
+  background-color: hsl(29, 0%, 85%);
 }
 
 .results {
