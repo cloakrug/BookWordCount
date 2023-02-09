@@ -18,6 +18,8 @@ code {
 .page-row {
   max-width: 800px;
   margin: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 #title {
