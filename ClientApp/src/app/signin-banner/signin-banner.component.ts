@@ -4,7 +4,7 @@ import { Router, RouterStateSnapshot } from '@angular/router';
 @Component({
   selector: 'signin-banner',
   templateUrl: './signin-banner.component.html',
-  styleUrls: ['./signin-banner.component.css']
+  styleUrls: ['./signin-banner.component.scss']
 })
 export class SigninBannerComponent implements OnInit {
   private routerSnapshot: RouterStateSnapshot;

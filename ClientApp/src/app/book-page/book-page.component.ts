@@ -8,7 +8,7 @@ import { BookService } from '../services/book.service';
 @Component({
   selector: 'book-page',
   templateUrl: './book-page.component.html',
-  styleUrls: ['./book-page.component.css']
+  styleUrls: ['./book-page.component.scss']
 })
 export class BookPageComponent implements OnInit {
 

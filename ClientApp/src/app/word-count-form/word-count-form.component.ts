@@ -7,7 +7,7 @@ import { SnackbarService } from '../services/snackbar.service';
 @Component({
   selector: 'word-count-form',
   templateUrl: './word-count-form.component.html',
-  styleUrls: ['./word-count-form.component.css']
+  styleUrls: ['./word-count-form.component.scss']
 })
 export class WordCountFormComponent implements OnInit {
   @Input('bookId') bookId: string = '';
