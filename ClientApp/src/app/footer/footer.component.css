@@ -8,8 +8,7 @@ footer {
   margin: 0;
   padding: 2rem 0;
   width: 100%;
-  color: white;
-  background-color: hsl(29, 0%, 40%);
+  background-color: hsl(29, 0%, 85%);
 }
 
 footer p {
