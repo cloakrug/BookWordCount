@@ -1,4 +1,6 @@
 export interface Genre {
-  id: string,
-  text: string
-}
+  id: number,
+  name: string,
+  color?: string,
+  textColor?: "light" | "dark"  // dark is default
+};

@@ -37,9 +37,16 @@ namespace BookWordCount.Helpers
         {
             IList<Genre> defaultGenres = new List<Genre>();
 
-            defaultGenres.Add(new Genre() { Id = 1, Text = "Action" });
-            defaultGenres.Add(new Genre() { Id = 2, Text = "Horror" });
-            defaultGenres.Add(new Genre() { Id = 3, Text = "Mystery" });
+            defaultGenres.Add(new Genre() { Id = 1, Name = "Action" });
+            defaultGenres.Add(new Genre() { Id = 2, Name = "Horror" });
+            defaultGenres.Add(new Genre() { Id = 3, Name = "Historical" });
+            defaultGenres.Add(new Genre() { Id = 4, Name = "Romance" });
+            defaultGenres.Add(new Genre() { Id = 5, Name = "Western" });
+            defaultGenres.Add(new Genre() { Id = 6, Name = "Science Fiction" });
+            defaultGenres.Add(new Genre() { Id = 7, Name = "Fantasy" });
+            defaultGenres.Add(new Genre() { Id = 8, Name = "Adventure" });
+            defaultGenres.Add(new Genre() { Id = 9, Name = "Dystopian" });
+            defaultGenres.Add(new Genre() { Id = 10, Name = "Mystery" });
 
             return defaultGenres;
         }
@@ -67,10 +74,7 @@ namespace BookWordCount.Helpers
                 ReleaseDate = DateTime.Now,
                 Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
                 ImageUrl = "",
-                Genres = new List<Genre>() { 
-                    _context.Genres.ToList()[0],
-                    _context.Genres.ToList()[1]
-                },
+                Genres = _context.Genres.ToList(),
                 MajorGenre = _context.MajorGenres.ToList()[0]
             });
 

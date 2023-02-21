@@ -7,7 +7,12 @@
     <h1 [innerText]="book.title"></h1>
     <h3 [innerText]="book.author"></h3>
     <p [innerText]="book.description"></p>
-    <p *ngFor="let genre of book.genres" [innerText]="genre.text" class="genre"></p>
+    <p *ngFor="let genre of book.genres"
+       [innerText]="genre.name"
+       class="genre"
+       [genreColor]="genre.id"
+       >
+    </p>
   </div>
 
   <div class="page-row form-section">
