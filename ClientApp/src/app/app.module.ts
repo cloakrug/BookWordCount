@@ -21,6 +21,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatTableModule } from '@angular/material/table';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { DifficultyColorDirective } from './directives/difficultyColor';
 import { AuthModule, LogLevel } from 'angular-auth-oidc-client';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
@@ -74,6 +75,7 @@ import { GenreColorDirective } from './genre-color.directive';
     MatSnackBarModule,
     MatInputModule,
     MatTableModule,
+    MatProgressSpinnerModule,
     MatCheckboxModule,
     RouterModule.forRoot([
       { path: "browse", component: BrowsePageComponent },

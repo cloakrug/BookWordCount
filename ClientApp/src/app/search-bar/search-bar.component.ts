@@ -11,6 +11,7 @@ import { BookResult, SearchResult } from '../models/searchresult';
 export class SearchBarComponent implements OnInit {
   @Input() searchText: string = "";
 
+  public loading: boolean = false;
   public results: SearchResult[] = [];
 
   constructor(
@@ -22,7 +23,12 @@ export class SearchBarComponent implements OnInit {
 
   onSearchInput(event: Event): void {
     if (this.searchText.length > 0) {
-      this.bookService.search(this.searchText, 0).subscribe(res => this.results = res);
+      this.loading = true;
+      this.bookService.search(this.searchText, 0)
+        .subscribe(res => {
+          this.results = res
+          this.loading = false;
+        });
     }
   }
 
