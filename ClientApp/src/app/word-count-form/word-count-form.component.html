@@ -1,4 +1,8 @@
-<form [formGroup]="form" (ngSubmit)="onSubmit()" class="panel" >
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="panel">
+
+  <div class="spinner-overlay">
+    <mat-spinner [diameter]="40"></mat-spinner>
+  </div>
 
   <h3 class="panel-header">Submit Stats</h3>
 
