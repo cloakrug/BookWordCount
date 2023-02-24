@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { AbstractControl, FormArray, FormControl, FormGroup, UntypedFormControl, UntypedFormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { AddBookStatsModel } from '../models/bookstatsmodel';
 import { BookService } from '../services/book.service';
 import { SnackbarService } from '../services/snackbar.service';
@@ -61,6 +61,8 @@ export class WordCountFormComponent implements OnInit {
       } else {
         this.form.controls[statControlName].removeValidators(Validators.required);
       }
+
+      this.form.controls[statControlName].updateValueAndValidity();
     }
 
     this.form.get('duration')?.updateValueAndValidity();  // Needed because it's not automatically checked
