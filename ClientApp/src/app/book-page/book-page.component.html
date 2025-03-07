@@ -4,15 +4,19 @@
 
 <ng-container *ngIf="book">
   <div class="bookInfo page-row">
-    <h1 [innerText]="book.title"></h1>
-    <h3 [innerText]="book.author"></h3>
-    <p [innerText]="book.description"></p>
-    <p *ngFor="let genre of book.genres"
-       [innerText]="genre.name"
-       class="genre"
-       [genreColor]="genre.id"
-       >
-    </p>
+    <div class="book-row-left">
+      <h1 [innerText]="book.title"></h1>
+      <h3 [innerText]="book.author"></h3>
+      <p [innerText]="book.description"></p>
+      <p *ngFor="let genre of book.genres"
+         [innerText]="genre.name"
+         class="genre"
+         [genreColor]="genre.id">
+      </p>
+    </div>
+    <div class="book-row-right">
+      <mat-icon class="edit-icon" (click)="onEditClick()">edit</mat-icon>
+    </div>
   </div>
 
   <div class="page-row form-section">

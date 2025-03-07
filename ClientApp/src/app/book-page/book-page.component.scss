@@ -9,3 +9,18 @@
 .genre {
   margin-right: 0.3rem;
 }
+
+.bookInfo {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.edit-icon {
+  cursor: pointer;
+}
+
+.book-row-right {
+    display: flex;
+    font-size: 1.5rem;
+}

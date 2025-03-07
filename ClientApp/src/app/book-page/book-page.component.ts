@@ -46,6 +46,10 @@ export class BookPageComponent implements OnInit {
     });
   }
 
+  onEditClick() {
+    // TODO
+  }
+
   handleGetBookError(err: HttpErrorResponse): void {
     this.errorGettingBook = true;
   }
