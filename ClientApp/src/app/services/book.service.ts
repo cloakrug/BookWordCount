@@ -5,6 +5,7 @@ import { Book } from '../models/book';
 import { AddBookStatsModel } from '../models/bookstatsmodel';
 import { SearchResult } from '../models/searchresult';
 import { UserBookStatsModel } from '../models/userbookstats';
+import { BookUpdateModel } from '../models/book-update-model';
 
 @Injectable({
   providedIn: 'root'
@@ -26,6 +27,10 @@ export class BookService {
 
   public getBookById(id: string): Observable<Book> {
     return this.http.get<Book>(`${this.apiUrl}/Book/${id}`);
+  }
+
+  public updateBookById(model: BookUpdateModel): Observable<Book> {
+    return this.http.post<Book>(`${this.apiUrl}/Book/${model.id}`, model);
   }
 
   public addStats(model: AddBookStatsModel): Observable<AddBookStatsModel> {

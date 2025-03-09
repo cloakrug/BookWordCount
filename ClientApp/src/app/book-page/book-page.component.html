@@ -4,19 +4,36 @@
 
 <ng-container *ngIf="book">
   <div class="bookInfo page-row">
-    <div class="book-row-left">
-      <h1 [innerText]="book.title"></h1>
-      <h3 [innerText]="book.author"></h3>
-      <p [innerText]="book.description"></p>
-      <p *ngFor="let genre of book.genres"
-         [innerText]="genre.name"
-         class="genre"
-         [genreColor]="genre.id">
-      </p>
-    </div>
-    <div class="book-row-right">
-      <mat-icon class="edit-icon" (click)="onEditClick()">edit</mat-icon>
-    </div>
+    <ng-container *ngIf="!editBookMode">
+      <div class="book-row-left" >
+        <h1 [innerText]="book.title"></h1>
+        <h3 [innerText]="book.author"></h3>
+        <p [innerText]="book.description"></p>
+        <p *ngFor="let genre of book.genres"
+           [innerText]="genre.name"
+           class="genre"
+           [genreColor]="genre.id">
+        </p>
+      </div>
+      <div class="book-row-right">
+        <mat-icon class="edit-icon" (click)="onEditClick()">edit</mat-icon>
+      </div>
+    </ng-container>
+
+    <form [formGroup]="editBookForm" (ngSubmit)="onEditBookSubmit()" *ngIf="editBookMode" class="editBookForm">
+      <mat-form-field style="width: 80%">
+        <mat-label>Title</mat-label>
+        <input matInput formControlName="title" />
+      </mat-form-field>
+      <br />
+      <mat-form-field style="width: 100%">
+        <mat-label>Description</mat-label>
+        <textarea matInput formControlName="description"></textarea>
+      </mat-form-field>
+      <br />
+      <button type="submit" mat-raised-button color="primary" >Submit</button>
+      <button type="button" (click)="onExitEditMode()" mat-button color="secondary">Clear</button>
+    </form>
   </div>
 
   <div class="page-row form-section">
