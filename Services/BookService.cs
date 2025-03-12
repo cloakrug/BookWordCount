@@ -90,11 +90,18 @@ namespace BookWordCount.Services
             return _mapper.Map<BookDto>(book);
         }
 
-        public Book UpdateBook(Book book)
+        public Book UpdateBook(string id, UpdateBookDto book)
         {
-            _ctx.Update(book);
+            var curr = _ctx.Books.FirstOrDefault(book => book.Id == id);
+
+            if (book == null ) return null;
+
+            curr.Title = book.Title;
+            curr.Description = book.Description;
+
+            _ctx.Update(curr);
             _ctx.SaveChanges();
-            return book;
+            return curr;
         }
 
         public bool DeleteBook(string id)

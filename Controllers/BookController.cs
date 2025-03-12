@@ -68,12 +68,11 @@ namespace BookWordCount.Controllers
             return Ok(_bookService.AddBook(addBookDto));
         }
 
-        [HttpPost("Update/{id}", Name = nameof(Update))]
-        public IActionResult Update(BookDto bookDto)
+        // TODO: authorization
+        [HttpPost("{id}", Name = nameof(Update))]
+        public IActionResult Update(string id, [FromBody]UpdateBookDto bookDto)
         {
-            var book = _mapper.Map<Book>(bookDto);
-
-            return Ok(_bookService.UpdateBook(book));
+            return Ok(_bookService.UpdateBook(id, bookDto));
         }
 
         [HttpDelete("Delete/{id}", Name = nameof(Delete))]
