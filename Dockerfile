@@ -7,8 +7,8 @@ EXPOSE 443
 # Build stage
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /BookWordCount
-COPY ["YourProject.csproj", "./"]
-RUN dotnet restore "./YourProject.csproj"
+COPY ["BookWordCount.csproj", "./"]
+RUN dotnet restore "./BookWordCount.csproj"
 
 COPY . .
 RUN dotnet publish -c Release -o /BookWordCount/publish
