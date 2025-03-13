@@ -19,7 +19,7 @@ FROM base as build
 RUN dotnet publish -c Release -o /BookWordCount/publish
 
 # Final stage
-FROM mcr.microsoft.com/dotnet/aspnet:8.0@latest AS final
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS final
 WORKDIR /BookWordCount
 COPY --from=build /BookWordCount/publish .
 ENTRYPOINT ["dotnet", "BookWordCount.dll"]
