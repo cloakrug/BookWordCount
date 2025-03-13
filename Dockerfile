@@ -13,7 +13,7 @@ RUN dotnet restore "./BookWordCount.csproj"
 # Build client
 FROM node:latest as clientBuild
 WORKDIR /ClientAppProd
-COPY src/ClientApp/ .
+COPY ClientApp/ .
 RUN npm install
 RUN npm run build
 
