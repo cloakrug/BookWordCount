@@ -1,5 +1,5 @@
 # Use an official .NET runtime as a parent image
-FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS base
 WORKDIR /BookWordCount
 EXPOSE 80
 EXPOSE 443
