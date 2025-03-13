@@ -10,6 +10,13 @@ WORKDIR /BookWordCount
 COPY ["BookWordCount.csproj", "./"]
 RUN dotnet restore "./BookWordCount.csproj"
 
+# Build client
+FROM node:latest as clientBuild
+WORKDIR /ClientAppProd
+COPY src/ClientApp/ .
+RUN npm install
+RUN npm run build
+
 COPY . .
 RUN dotnet publish -c Release -o /BookWordCount/publish
 
