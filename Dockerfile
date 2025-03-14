@@ -14,7 +14,7 @@ RUN npm install
 RUN npm run build
 
 FROM base as build
-RUN dotnet publish -c Release -o /BookWordCount/publish
+RUN dotnet publish -c Release -o /BookWordCount/publish /p:UseAppHost=false
 
 # Final stage
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS final
