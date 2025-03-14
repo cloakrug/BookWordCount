@@ -107,7 +107,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 
 app.UseStaticFiles();
 
@@ -133,6 +133,7 @@ using (var scope = app.Services.CreateScope())
     dbInitializer.SeedDatabase();
 }
 
+app.MapHealthChecks("/health");
 
 app.Run();
 
