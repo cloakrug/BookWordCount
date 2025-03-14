@@ -18,7 +18,6 @@ RUN dotnet publish -c Release -o /BookWordCount/publish /p:UseAppHost=false
 
 # Final stage
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS final
-ENV ASPNETCORE_URLS=http://+:8080
 EXPOSE 8080
 WORKDIR /BookWordCount
 COPY --from=build /BookWordCount/publish .
