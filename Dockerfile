@@ -14,6 +14,7 @@ RUN npm install
 RUN npm run build
 
 FROM base as build
+COPY --from=clientBuild /ClientAppProd/dist /BookWordCount/wwwroot
 RUN dotnet publish -c Release -o /BookWordCount/publish /p:UseAppHost=false
 
 # Final stage
