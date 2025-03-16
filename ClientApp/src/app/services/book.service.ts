@@ -12,7 +12,7 @@ import { BookUpdateModel } from '../models/book-update-model';
 })
 export class BookService {
   
-  private readonly apiUrl: string = 'https://localhost:7041';
+  private readonly apiUrl: string = ''; // It should all go to the same URL as the frontend
   private readonly userStatsUrl: string = `${this.apiUrl}/UserBookStat`;
 
   constructor(private http: HttpClient) { }
