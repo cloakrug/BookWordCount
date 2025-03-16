@@ -77,7 +77,6 @@
             },
             "development": {
               "browserTarget": "BookWordCount:build:development",
-              "proxyConfig": "proxy.conf.js"
             }
           },
           "defaultConfiguration": "development"
