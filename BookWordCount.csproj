@@ -61,7 +61,7 @@
 		<Exec WorkingDirectory="$(SpaRoot)" Command="npm install" />
 	</Target>
 
-	<Target Name="BuildSpa" AfterTargets="EnsureNodeModulesAndNPMInstall">
+	<Target Name="BuildSpa" Condition="'$(Configuration)' == 'Debug'" AfterTargets="EnsureNodeModulesAndNPMInstall">
 		<Message Importance="high" Text="Building frontend..." />
 		<Exec WorkingDirectory="$(SpaRoot)" Command="npm run build" />
 
