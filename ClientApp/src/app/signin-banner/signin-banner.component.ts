@@ -21,5 +21,9 @@ export class SigninBannerComponent implements OnInit {
     console.log(' in onLoginClick')
     this.router.navigate(['/login'], { queryParams: { returnUrl: this.routerSnapshot.url } });
   }
+
+  enterDemoMode(): void{
+    
+  }
 }
 
