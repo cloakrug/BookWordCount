@@ -11,6 +11,7 @@ import { SnackbarService } from '../services/snackbar.service';
 })
 export class WordCountFormComponent implements OnInit {
   @Input('bookId') bookId: string = '';
+  @Input('form-disabled') formDisabled: boolean = false;
   
   // TODO: @Output when the form has been successfully submitted
 
