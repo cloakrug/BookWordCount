@@ -3,8 +3,12 @@ using BookWordCount.Interfaces;
 using BookWordCount.Models;
 using BookWordCount.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http.Json;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.FileProviders;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.Text.Json;
 
@@ -79,7 +83,14 @@ builder.Services.AddControllers();
 
 builder.Services.AddDbContext<BookContext>(opt =>
 {
+    if(builder.Configuration.GetValue<bool>("useInMemoryDb"))
+    {
     opt.UseInMemoryDatabase("bookdb");
+    } else
+    {
+        var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+        opt.UseNpgsql(connectionString);
+    }
 });
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
@@ -128,11 +139,15 @@ app.MapFallbackToFile("index.html");
 
 
 // TODO: Delete - this is used to seed data while testing.
+if(builder.Configuration.GetValue<bool>("useInMemoryDb"))
+{
 using (var scope = app.Services.CreateScope())
 {
     var dbInitializer = scope.ServiceProvider.GetRequiredService<BookDbInitializer>();
     dbInitializer.SeedDatabase();
 }
+}
+
 
 app.MapHealthChecks("/health");
 
