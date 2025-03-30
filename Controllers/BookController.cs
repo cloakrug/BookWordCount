@@ -6,6 +6,7 @@ using BookWordCount.Models;
 using BookWordCount.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BookWordCount.Controllers
 {
@@ -62,19 +63,21 @@ namespace BookWordCount.Controllers
             return Ok(searchResults.ToList());
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost("Add", Name = nameof(Add))]
         public IActionResult Add(AddBookDto addBookDto)
         {
             return Ok(_bookService.AddBook(addBookDto));
         }
 
-        // TODO: authorization
+        [Authorize(Roles = "Admin")]
         [HttpPost("{id}", Name = nameof(Update))]
         public IActionResult Update(string id, [FromBody]UpdateBookDto bookDto)
         {
             return Ok(_bookService.UpdateBook(id, bookDto));
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpDelete("Delete/{id}", Name = nameof(Delete))]
         public IActionResult Delete(string id)
         {
