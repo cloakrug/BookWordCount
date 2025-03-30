@@ -1,6 +1,6 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()" class="panel">
 
-  <div *ngIf="demoMode" class="overlay"></div>
+  <div *ngIf="!loggedIn && !demoMode" class="overlay"></div>
 
   <h3 class="panel-header">Submit Stats</h3>
 

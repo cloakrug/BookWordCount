@@ -14,6 +14,7 @@ export class WordCountFormComponent implements OnInit {
   @Input('bookId') bookId: string = '';
   @Input('form-disabled') formDisabled: boolean = false;
   public demoMode: boolean = false;
+  public loggedIn: boolean = false;
   
   // TODO: @Output when the form has been successfully submitted
 
@@ -49,6 +50,11 @@ export class WordCountFormComponent implements OnInit {
     this.authService.demoMode$.subscribe((demoMode: boolean) => {
       console.log('wordcountform demoMode: ', demoMode)
       this.demoMode = demoMode;
+    });
+
+    this.authService.isLoggedIn().subscribe((loggedIn: boolean) => {
+      console.log('wordcountform loggedIn: ', loggedIn)
+      this.loggedIn = loggedIn;
     });
 
     console.log('in WordCountFormComponent ngOnInit');
