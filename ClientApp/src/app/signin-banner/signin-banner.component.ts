@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterStateSnapshot } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'signin-banner',
@@ -9,7 +10,7 @@ import { Router, RouterStateSnapshot } from '@angular/router';
 export class SigninBannerComponent implements OnInit {
   private routerSnapshot: RouterStateSnapshot;
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private authService: AuthService) {
     this.routerSnapshot = router.routerState.snapshot;
   }
 
@@ -23,7 +24,8 @@ export class SigninBannerComponent implements OnInit {
   }
 
   enterDemoMode(): void{
-    
+    console.log('entering demo mode...')
+    this.authService.setDemoMode(true); 
   }
 }
 

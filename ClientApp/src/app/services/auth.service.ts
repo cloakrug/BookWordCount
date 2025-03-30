@@ -10,12 +10,13 @@ export class AuthService {
   public googleLibraryLoadedDataSource: BehaviorSubject<boolean> = new BehaviorSubject(false);
   public credentialResponse$: EventEmitter<boolean> = new EventEmitter<boolean>();
   public tokenDataSource: BehaviorSubject<string> = new BehaviorSubject("");
+  public demoMode$: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
   constructor(private zone: NgZone) {
     this.googleLibraryLoaded$().subscribe((loaded: boolean) => {
       if (loaded) {
         this.tokenDataSource.next(this.getBearerToken());
-      } 
+      }
     });
   }
 
@@ -40,7 +41,7 @@ export class AuthService {
   }
 
   public isTokenNull(token: string): boolean {
-    return token !== null && token !== undefined && token !== "" 
+    return token !== null && token !== undefined && token !== ""
   }
 
   public googleLibraryLoaded(): boolean {
@@ -49,7 +50,7 @@ export class AuthService {
   }
 
   public googleLibraryLoaded$(): Observable<boolean> {
-    return this.googleLibraryLoadedDataSource;  
+    return this.googleLibraryLoadedDataSource;
   }
 
   public getBearerToken(): string {
@@ -65,5 +66,9 @@ export class AuthService {
     console.log("removing token");
     this.tokenDataSource.next("");
     localStorage.removeItem("token");
+  }
+
+  public setDemoMode(mode: boolean) {
+    this.demoMode$.next(mode);
   }
 }

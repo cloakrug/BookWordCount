@@ -3,6 +3,7 @@ import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn,
 import { AddBookStatsModel } from '../models/bookstatsmodel';
 import { BookService } from '../services/book.service';
 import { SnackbarService } from '../services/snackbar.service';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'word-count-form',
@@ -12,6 +13,7 @@ import { SnackbarService } from '../services/snackbar.service';
 export class WordCountFormComponent implements OnInit {
   @Input('bookId') bookId: string = '';
   @Input('form-disabled') formDisabled: boolean = false;
+  public demoMode: boolean = false;
   
   // TODO: @Output when the form has been successfully submitted
 
@@ -33,7 +35,8 @@ export class WordCountFormComponent implements OnInit {
   
   constructor(
     private bookService: BookService,
-    private snackbarService: SnackbarService
+    private snackbarService: SnackbarService,
+    private authService: AuthService
   ) { }
   
   ngOnInit(): void {
@@ -41,6 +44,12 @@ export class WordCountFormComponent implements OnInit {
     console.log('bookId: ', this.bookId)
 
     if (this.bookId === null || this.bookId === undefined || this.bookId.trim() === '') throw new Error('bookId was not passed');
+
+
+    this.authService.demoMode$.subscribe((demoMode: boolean) => {
+      console.log('wordcountform demoMode: ', demoMode)
+      this.demoMode = demoMode;
+    });
 
     console.log('in WordCountFormComponent ngOnInit');
     this.form.controls["cbxWordCount"].valueChanges.subscribe(() => this.onCheckboxValueChange());

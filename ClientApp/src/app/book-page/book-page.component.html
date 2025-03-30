@@ -36,9 +36,9 @@
     </form>
   </div>
 
-  <div class="page-row form-section">
+  <div class="page-row form-section"> 
     <signin-banner *ngIf="displayLoginBanner" class="page-row"></signin-banner>
-    <word-count-form *ngIf="book" [bookId]="book.id" [form-disabled]="displayLoginBanner"></word-count-form>
+    <word-count-form *ngIf="book" [bookId]="book.id"></word-count-form>
   </div>
 </ng-container>
 
