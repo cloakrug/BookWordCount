@@ -7,7 +7,7 @@ import { BookService } from '../services/book.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { BookUpdateModel } from '../models/book-update-model';
 import { SnackbarService } from '../services/snackbar.service';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subscription, combineLatest } from 'rxjs';
 
 @Component({
   selector: 'book-page',
@@ -23,6 +23,8 @@ export class BookPageComponent implements OnInit {
 
   public editBookForm: FormGroup;
   public isAdmin$: BehaviorSubject<boolean>;
+
+  private latestDisplayBannerSubscription: Subscription | undefined;
 
   constructor(
     private bookService: BookService,
@@ -61,6 +63,11 @@ export class BookPageComponent implements OnInit {
       console.log('in BookPageComponent, got isLoggedIn: ' + isLoggedIn);
       this.displayLoginBanner = !isLoggedIn;
     });
+
+    // if logged in or in demo mode, dont show the banner
+    this.latestDisplayBannerSubscription = combineLatest(this.authService.isLoggedIn(), this.authService.demoMode$).subscribe(([isLoggedIn, demoMode]) => {
+      this.displayLoginBanner = !isLoggedIn && !demoMode;
+    });
   }
 
   onEditClick() {
@@ -94,5 +101,11 @@ export class BookPageComponent implements OnInit {
 
   handleInvalidUrl(): void {
     throw new Error('Method not implemented.');
+  }
+
+  ngOnDestroy() {
+    if (this.latestDisplayBannerSubscription) {
+      this.latestDisplayBannerSubscription.unsubscribe();
+    }
   }
 }
