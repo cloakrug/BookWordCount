@@ -36,6 +36,7 @@ namespace BookWordCount.Controllers
             return Ok(userBookStat);
         }
 
+        [Authorize]
         [HttpGet]
         public IActionResult GetBookStatsForCurrentUser(string bookId)
         {
