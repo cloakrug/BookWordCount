@@ -9,7 +9,7 @@
     "start:default": "ng serve --port 44313 --ssl --ssl-cert $HOME/.aspnet/https/${npm_package_name}.pem --ssl-key $HOME/.aspnet/https/${npm_package_name}.key",
     "build": "ng build",
     "build:ssr": "ng run BookWordCount:server:dev",
-    "watch": "ng build --watch --configuration development",
+    "watch": "ng build --watch",
     "test": "ng test"
   },
   "private": true,
