@@ -15,7 +15,7 @@
            [genreColor]="genre.id">
         </p>
       </div>
-      <div class="book-row-right">
+      <div class="book-row-right" *ngIf="isAdmin$ | async">
         <mat-icon class="edit-icon" (click)="onEditClick()">edit</mat-icon>
       </div>
     </ng-container>

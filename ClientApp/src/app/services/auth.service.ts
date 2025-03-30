@@ -11,6 +11,7 @@ export class AuthService {
   public credentialResponse$: EventEmitter<boolean> = new EventEmitter<boolean>();
   public tokenDataSource: BehaviorSubject<string> = new BehaviorSubject("");
   public demoMode$: BehaviorSubject<boolean> = new BehaviorSubject(false);
+  public isAdmin$: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
   constructor(private zone: NgZone) {
     this.googleLibraryLoaded$().subscribe((loaded: boolean) => {

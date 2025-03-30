@@ -7,6 +7,7 @@ import { BookService } from '../services/book.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { BookUpdateModel } from '../models/book-update-model';
 import { SnackbarService } from '../services/snackbar.service';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'book-page',
@@ -21,6 +22,7 @@ export class BookPageComponent implements OnInit {
   public displayLoginBanner: boolean = false;
 
   public editBookForm: FormGroup;
+  public isAdmin$: BehaviorSubject<boolean>;
 
   constructor(
     private bookService: BookService,
@@ -34,6 +36,7 @@ export class BookPageComponent implements OnInit {
       title: [''],
       description: ['']
     });
+    this.isAdmin$ = this.authService.isAdmin$;
   }
 
   ngOnInit(): void {
