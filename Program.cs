@@ -85,7 +85,7 @@ builder.Services.AddDbContext<BookContext>(opt =>
 {
     if(builder.Configuration.GetValue<bool>("useInMemoryDb"))
     {
-    opt.UseInMemoryDatabase("bookdb");
+        opt.UseInMemoryDatabase("bookdb");
     } else
     {
         var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
@@ -116,12 +116,29 @@ if (app.Environment.IsDevelopment())
     app.UseHsts();
     app.UseSwagger();
     app.UseSwaggerUI();
-}
+} 
 
 //app.UseHttpsRedirection();
 
-app.UseDefaultFiles();
-app.UseStaticFiles();
+// if dev, serve from the Angular dist folder, else, wwwroot
+if (app.Environment.IsDevelopment())
+{
+    var filePathProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "ClientApp", "dist"));
+
+    app.UseDefaultFiles(new DefaultFilesOptions() { FileProvider = filePathProvider });
+
+    app.UseStaticFiles(new StaticFileOptions
+    {
+        FileProvider = filePathProvider,
+    });
+}
+else
+{
+    app.UseDefaultFiles();
+    app.UseStaticFiles(); // wwwroot
+}
+
+
 
 app.UseRouting();
 
@@ -129,7 +146,7 @@ app.UseCors(MyAllowSpecificOrigins);
 
 app.UseAuthentication();
 
-app.UseAuthorization();
+app.UseAuthorization(); 
 
 app.MapControllerRoute(
     name: "default",
@@ -141,11 +158,11 @@ app.MapFallbackToFile("index.html");
 // TODO: Delete - this is used to seed data while testing.
 if(builder.Configuration.GetValue<bool>("useInMemoryDb"))
 {
-using (var scope = app.Services.CreateScope())
-{
-    var dbInitializer = scope.ServiceProvider.GetRequiredService<BookDbInitializer>();
-    dbInitializer.SeedDatabase();
-}
+    using (var scope = app.Services.CreateScope())
+    {
+        var dbInitializer = scope.ServiceProvider.GetRequiredService<BookDbInitializer>();
+        dbInitializer.SeedDatabase();
+    }
 }
 
 

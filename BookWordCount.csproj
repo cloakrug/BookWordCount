@@ -67,15 +67,5 @@
 	<Target Name="BuildSpa" Condition="'$(Configuration)' == 'Debug'" AfterTargets="EnsureNodeModulesAndNPMInstall">
 		<Message Importance="high" Text="Building frontend..." />
 		<Exec WorkingDirectory="$(SpaRoot)" Command="npm run build" />
-
-
-		<ItemGroup>
-			<AngularFiles Include="ClientApp/dist/**/*" />
-		</ItemGroup>
-
-		<Copy SourceFiles="@(AngularFiles)" DestinationFolder="wwwroot/" />
-		
 	</Target>
-
-
 </Project>
