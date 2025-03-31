@@ -5,10 +5,10 @@
   <h3 class="panel-header">Submit Stats</h3>
 
   <div class="form-section checkbox-row">
-    <p><mat-checkbox formControlName="cbxWordCount" id="cbxWordCount">Word Count</mat-checkbox></p>
-    <p><mat-checkbox formControlName="cbxPageCount" id="cbxPageCount">Page Count</mat-checkbox></p>
-    <p><mat-checkbox formControlName="cbxDuration" id="cbxDuration">Time to Read</mat-checkbox></p>
-    <p><mat-checkbox formControlName="cbxDifficulty" id="cbxDifficulty">Difficulty</mat-checkbox></p>
+    <p><mat-checkbox formControlName="cbxWordCount" id="cbxWordCount" color="primary">Word Count</mat-checkbox></p>
+    <p><mat-checkbox formControlName="cbxPageCount" id="cbxPageCount" color="primary">Page Count</mat-checkbox></p>
+    <p><mat-checkbox formControlName="cbxDuration" id="cbxDuration" color="primary">Time to Read</mat-checkbox></p>
+    <p><mat-checkbox formControlName="cbxDifficulty" id="cbxDifficulty" color="primary">Difficulty</mat-checkbox></p>
   </div>
 
   <div id="wordCountSection" class="form-section" [hidden]="form.controls['cbxWordCount'].value == false">
