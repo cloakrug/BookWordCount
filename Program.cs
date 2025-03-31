@@ -89,6 +89,8 @@ builder.Services.AddDbContext<BookContext>(opt =>
     } else
     {
         var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+        // log connection string
+        Console.WriteLine($"Connection string: {connectionString.Substring(0, 50)}");
         opt.UseNpgsql(connectionString);
     }
 });
