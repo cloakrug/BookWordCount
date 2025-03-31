@@ -21,10 +21,7 @@ export class LoginPageComponent implements OnInit {
   ngOnInit(): void {
     this.authService.googleLibraryLoaded$().subscribe((res: boolean) => {
       if (res) {
-        console.log('googleLibraryLoaded$ returned true');
         this.renderLoginButton();
-      } else {
-        console.log('googleLibraryLoaded$ returned false');
       }
     });
 
